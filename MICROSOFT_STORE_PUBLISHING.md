@@ -15,16 +15,16 @@ Assumption: you already have a Microsoft Partner Center account.
 2. Open **Apps and games**.
 3. If TubeDesk is not created yet:
    - Click **Create a new app**
-   - Reserve the app name (for example: `TubeDesk for Windows`)
+   - Reserve the app name (e.g., `TubeDesk for Windows`)
 4. Open the app entry and note these exact values:
-   - **Package/Identity/Publisher** (for example `CN=...`)
+   - **Package/Identity/Publisher** (e.g., `CN=...`)
    - Publisher display name used by your account
 
 ## 2) Align `package.json` with Partner Center identity
 
 Open `package.json` and verify:
 
-- `build.productName` = Store display name (for example `TubeDesk for Windows`)
+- `build.productName` = Store display name (e.g., `TubeDesk for Windows`)
 - `build.appx.displayName` = same Store display name
 - `build.appx.publisher` = exact Partner Center **Package/Identity/Publisher** (`CN=...`)
 - `build.appx.publisherDisplayName` = your Partner Center publisher display name
