@@ -1,6 +1,6 @@
-# YouTube Desktop for Windows
+# TubeDesk for Windows
 
-> A polished Electron-based desktop wrapper for YouTube on Windows — with persistent login, mini-player, system tray, shortcuts, focus mode, and a custom power-user interface.
+> A polished, unofficial Electron-based desktop wrapper for YouTube and YouTube Music on Windows — with persistent login, mini-player, system tray, shortcuts, focus mode, and a custom power-user interface.
 
 ![Platform](https://img.shields.io/badge/platform-Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
 ![Electron](https://img.shields.io/badge/Electron-Desktop_App-47848F?style=for-the-badge&logo=electron&logoColor=white)
@@ -9,20 +9,23 @@
 
 ## Overview
 
-**YouTube Desktop for Windows** is a lightweight desktop app that opens YouTube in its own dedicated Windows application window. It is designed as a clean, modern, power-user-friendly wrapper around YouTube — not a downloader, ad blocker, or Premium bypass tool.
+**TubeDesk for Windows** is a lightweight desktop app that opens YouTube and YouTube Music in a dedicated Windows application window. It is designed as a clean, modern, power-user-friendly wrapper — not a downloader, ad blocker, or Premium bypass tool.
 
 The app keeps your YouTube/Google login session using a persistent Electron session partition, so you can sign in once and remain logged in between launches.
+
+TubeDesk for Windows is unofficial and is not affiliated with, endorsed by, sponsored by, or approved by Google LLC or YouTube.
 
 ## Features
 
 ### Core
 
-- Dedicated YouTube desktop window
+- Dedicated YouTube / YouTube Music desktop window
 - Persistent Google/YouTube login session
 - Back, forward, reload, and home controls
 - YouTube URL/search bar
 - Dark custom toolbar
 - Windows installer build support
+- Microsoft Store package build support on Windows
 
 ### Power-user extras
 
@@ -42,7 +45,7 @@ The app keeps your YouTube/Google login session using a persistent Electron sess
 
 ## Requirements
 
-- Windows 10 or Windows 11
+- Windows 10 or Windows 11 for Windows/AppX/MSIX builds
 - Node.js 18+
 - npm
 - Git, optional but recommended
@@ -78,7 +81,7 @@ npm start
 
 ## Build Windows Installer
 
-Create a Windows installer using `electron-builder`:
+Create a standard Windows NSIS installer:
 
 ```bash
 npm run build
@@ -90,24 +93,60 @@ The generated installer will be placed in:
 dist/
 ```
 
+## Build Microsoft Store Package
+
+The Store package uses Electron Builder's AppX/MSIX target:
+
+```bash
+npm run build:store
+```
+
+Important: `appx` / Microsoft Store packaging must be built on a real Windows environment. It does **not** work from Ubuntu, Linux, or WSL.
+
+Use one of these instead:
+
+```text
+Windows 10/11 PowerShell
+GitHub Actions windows-latest runner
+Windows VM
+```
+
+Recommended path:
+
+```text
+GitHub → Actions → Build Windows Packages → Run workflow
+```
+
+Then download the artifact named:
+
+```text
+TubeDesk-Windows-Store-Package
+```
+
+Upload that package in Microsoft Partner Center.
+
 ## Project Structure
 
 ```text
 youtube-desktop-win/
+├─ .github/workflows/build-windows.yml
 ├─ assets/
-│  └─ icon.svg
+│  ├─ icon.svg
+│  └─ icon.ico
 ├─ index.html
 ├─ main.js
 ├─ mini.html
 ├─ package.json
 ├─ preload.js
 ├─ renderer.js
+├─ PRIVACY.md
+├─ STORE-LISTING.md
 ├─ README.md
 ├─ LICENSE
 └─ .gitignore
 ```
 
-For full tray icon support, add a Windows icon at:
+For full tray icon and installer icon support, add a Windows icon at:
 
 ```text
 assets/icon.ico
@@ -119,7 +158,7 @@ assets/icon.ico
 |---|---|
 | `Ctrl + L` | Focus search/URL field |
 | `Ctrl + R` | Reload YouTube |
-| `Ctrl + H` | Go to custom start page / home |
+| `Ctrl + H` | Go to YouTube Home |
 | `Ctrl + M` | Toggle mute |
 | `Ctrl + Shift + F` | Toggle focus mode |
 | `Ctrl + Shift + Y` | Show/hide app globally |
@@ -149,7 +188,7 @@ This project intentionally does **not** include:
 - YouTube API scraping
 - Any feature designed to violate YouTube or Google terms
 
-The goal is simple: a clean desktop experience for YouTube on Windows.
+The goal is simple: a clean desktop experience for YouTube and YouTube Music on Windows.
 
 ## Development Notes
 
@@ -159,13 +198,19 @@ Run the app:
 npm start
 ```
 
-Build installer:
+Build NSIS installer:
 
 ```bash
 npm run build
 ```
 
-Clean install:
+Build Store package on Windows:
+
+```bash
+npm run build:store
+```
+
+Clean install on Linux/macOS:
 
 ```bash
 rm -rf node_modules package-lock.json dist
@@ -173,7 +218,7 @@ npm install
 npm run build
 ```
 
-On Windows PowerShell:
+Clean install on Windows PowerShell:
 
 ```powershell
 Remove-Item -Recurse -Force node_modules, dist
@@ -191,7 +236,9 @@ npm run build
 - [ ] Import/export app settings
 - [ ] Auto-update support
 - [ ] Screenshot assets for README
-- [ ] GitHub Actions build pipeline
+- [x] GitHub Actions build pipeline
+- [x] Microsoft Store listing draft
+- [x] Privacy policy
 
 ## License
 
