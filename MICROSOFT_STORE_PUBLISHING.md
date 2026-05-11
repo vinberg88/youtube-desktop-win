@@ -129,13 +129,13 @@ Confirm the manifest identity/publisher/display name matches Partner Center.
 
 In Partner Center submission, you will need:
 
-1. **Descriptions and text**  
+1. **Descriptions and text**
    Use/adapt `STORE-LISTING.md`.
-2. **Privacy policy URL**  
+2. **Privacy policy URL**
    Host `PRIVACY.md` on a public URL and use that URL in Partner Center.
-3. **Store images/screenshots**  
+3. **Store images/screenshots**
    Prepare required Store asset sizes/screenshots.
-4. **Category and age rating answers**  
+4. **Category and age rating answers**
    Choose category (Entertainment/Music is typically appropriate for this app).
 
 ## 6) Create and complete the submission in Partner Center
