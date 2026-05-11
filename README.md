@@ -46,7 +46,7 @@ TubeDesk for Windows is unofficial and is not affiliated with, endorsed by, spon
 ## Requirements
 
 - Windows 10 or Windows 11 for Windows/AppX/MSIX builds
-- Node.js 18+
+- Node.js 22.12+ (required by the pinned Electron toolchain)
 - npm
 - Git, optional but recommended
 
@@ -70,7 +70,7 @@ cd youtube-desktop-win
 Install dependencies:
 
 ```bash
-npm install
+npm ci
 ```
 
 Start the app in development mode:
@@ -127,16 +127,12 @@ Upload that package in Microsoft Partner Center.
 
 ### Store Identity Configuration
 
-The `appx` section in `package.json` must match your Partner Center app registration:
+Before building for Microsoft Store, make sure the values under `build.appx` in `package.json` match the package identity and publisher registered in Partner Center.
 
-| Field | Purpose |
-|-------|---------|
-| `identityName` | Must match the **Package/Identity/Name** from Partner Center |
-| `publisher` | Must match the **Package/Identity/Publisher** (CN=...) from Partner Center |
-| `publisherDisplayName` | Must match the publisher display name in Partner Center |
-| `applicationId` | Internal app identifier (no spaces or special characters) |
+For the full release and Store publication workflow, see:
 
-Update `publisher` in `package.json` → `build.appx.publisher` to match your certificate subject before building.
+- [`RELEASE-CHECKLIST.md`](RELEASE-CHECKLIST.md)
+- [`MICROSOFT-STORE-PUBLISHING.md`](MICROSOFT-STORE-PUBLISHING.md)
 
 ### Store Limitations
 
@@ -161,6 +157,8 @@ youtube-desktop-win/
 ├─ preload.js
 ├─ renderer.js
 ├─ PRIVACY.md
+├─ RELEASE-CHECKLIST.md
+├─ MICROSOFT-STORE-PUBLISHING.md
 ├─ STORE-LISTING.md
 ├─ README.md
 ├─ LICENSE
@@ -234,8 +232,8 @@ npm run build:store
 Clean install on Linux/macOS:
 
 ```bash
-rm -rf node_modules package-lock.json dist
-npm install
+rm -rf node_modules dist
+npm ci
 npm run build
 ```
 
@@ -243,8 +241,7 @@ Clean install on Windows PowerShell:
 
 ```powershell
 Remove-Item -Recurse -Force node_modules, dist
-Remove-Item -Force package-lock.json
-npm install
+npm ci
 npm run build
 ```
 

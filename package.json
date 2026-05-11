@@ -1,17 +1,21 @@
 {
   "name": "tubedesk-for-windows",
+  "private": true,
   "version": "0.4.3",
   "description": "A polished, unofficial desktop wrapper for YouTube and YouTube Music on Windows.",
   "main": "main.js",
   "author": "Mattias Vinberg",
   "companyName": "Mattias Vinberg",
   "license": "MIT",
+  "engines": {
+    "node": ">=22.12.0",
+    "npm": ">=10"
+  },
   "scripts": {
     "start": "electron .",
     "build": "electron-builder --win nsis",
     "build:store": "electron-builder --win appx",
-    "build:all": "electron-builder --win nsis appx",
-    "dist": "npm run build"
+    "build:all": "electron-builder --win nsis appx"
   },
   "build": {
     "appId": "se.vinberg.tubedesk",
@@ -60,7 +64,7 @@
     }
   },
   "devDependencies": {
-    "electron": "latest",
-    "electron-builder": "latest"
+    "electron": "42.0.1",
+    "electron-builder": "26.8.1"
   }
 }
