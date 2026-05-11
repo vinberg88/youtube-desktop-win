@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>YouTube Desktop</title>
+  <title>TubeDesk for Windows</title>
   <style>
     :root{--bg:#070707;--panel:#111;--panel2:#1b1b1b;--line:#2b2b2b;--text:#f5f5f5;--muted:#a1a1aa;--red:#ff0033}
     *{box-sizing:border-box} body{margin:0;background:radial-gradient(circle at top left,#2a0710,#070707 42%,#020202);color:var(--text);font-family:Segoe UI,Arial,sans-serif;overflow:hidden}
@@ -17,13 +17,13 @@
 <body>
   <div id="app">
     <div id="toolbar">
-      <div class="brand">▶ YouTube Desktop</div><button id="back">←</button><button id="forward">→</button><button id="reload">⟳</button><button id="home">Hem</button><button id="startBtn">Start</button>
+      <div class="brand">▶ TubeDesk</div><button id="back">←</button><button id="forward">→</button><button id="reload">⟳</button><button id="home">Hem</button><button id="startBtn">Start</button>
       <input id="url" placeholder="Sök på YouTube eller skriv URL" /><button id="go">Gå</button><button id="top">Top</button><button id="mini">Mini</button><button id="mute">Mute</button><button id="focus">Fokus</button>
     </div>
     <div id="progress"></div>
     <div class="main">
       <aside class="side"><h3>Snabbval</h3><button class="link" data-cmd="home">YouTube Home</button><button class="link" data-cmd="subscriptions">Prenumerationer</button><button class="link" data-cmd="music">YouTube Music</button><button class="link" data-cmd="trending">Trending</button><button class="link" data-cmd="history">Historik</button><button class="link" data-cmd="later">Watch Later</button><h3>Verktyg</h3><button class="link" data-cmd="start">Startsida</button><button class="link" id="external">Öppna externt</button><button class="link" id="clear">Rensa login/session</button><button class="link" id="zoomIn">Zoom +</button><button class="link" id="zoomOut">Zoom -</button><button class="link" id="zoomReset">Zoom 100%</button></aside>
-      <main class="content"><section id="start"><div class="hero"><h1>YouTube Desktop</h1><p>En snygg Windows-wrapper med persistent login, mini-player, tray, fokusläge och snabbkommandon.</p><div class="cards"><div class="card" data-cmd="home">YouTube Home</div><div class="card" data-cmd="subscriptions">Prenumerationer</div><div class="card" data-cmd="music">YouTube Music</div><div class="card" data-cmd="trending">Trending</div></div></div></section><webview id="youtube" src="https://www.youtube.com" partition="persist:youtube" allowpopups></webview><div id="toast"></div></main>
+      <main class="content"><section id="start"><div class="hero"><h1>TubeDesk for Windows</h1><p>En snygg, inofficiell Windows-wrapper för YouTube och YouTube Music med persistent login, mini-player, tray, fokusläge och snabbkommandon.</p><div class="cards"><div class="card" data-cmd="home">YouTube Home</div><div class="card" data-cmd="subscriptions">Prenumerationer</div><div class="card" data-cmd="music">YouTube Music</div><div class="card" data-cmd="trending">Trending</div></div></div></section><webview id="youtube" src="https://www.youtube.com" partition="persist:youtube" allowpopups></webview><div id="toast"></div></main>
     </div>
     <div class="status"><span id="status">Redo</span><span style="margin-left:auto" id="appInfo"></span></div>
   </div>
