@@ -95,13 +95,13 @@ dist/
 
 ## Build Microsoft Store Package
 
-The Store package uses Electron Builder's AppX/MSIX target:
+This repository uses Electron Builder's AppX target:
 
 ```bash
 npm run build:store
 ```
 
-Important: `appx` / Microsoft Store packaging must be built on a real Windows environment. It does **not** work from Ubuntu, Linux, or WSL.
+Important: `appx` packaging must be built on a real Windows environment. It does **not** work from Ubuntu, Linux, or WSL.
 
 Use one of these instead:
 
@@ -132,7 +132,7 @@ Before building for Microsoft Store, make sure the values under `build.appx` in 
 For the full release and Store publication workflow, see:
 
 - [`RELEASE-CHECKLIST.md`](RELEASE-CHECKLIST.md)
-- [`MICROSOFT-STORE-PUBLISHING.md`](MICROSOFT-STORE-PUBLISHING.md)
+- [`MICROSOFT_STORE_PUBLISHING.md`](MICROSOFT_STORE_PUBLISHING.md)
 
 ### Store Limitations
 
@@ -158,7 +158,7 @@ youtube-desktop-win/
 ├─ renderer.js
 ├─ PRIVACY.md
 ├─ RELEASE-CHECKLIST.md
-├─ MICROSOFT-STORE-PUBLISHING.md
+├─ MICROSOFT_STORE_PUBLISHING.md
 ├─ STORE-LISTING.md
 ├─ README.md
 ├─ LICENSE
