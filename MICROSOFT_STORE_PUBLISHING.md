@@ -9,6 +9,77 @@ This guide is tailored to the current `main` setup in this repository:
 
 Assumption: you already have a Microsoft Partner Center account.
 
+## 0) Exact materials to copy for this repository
+
+### (1) Exact Microsoft Store listing draft (English)
+
+**App name**
+`TubeDesk for Windows`
+
+**Short description**
+`A clean, unofficial desktop wrapper for YouTube and YouTube Music on Windows.`
+
+**Long description**
+
+> TubeDesk for Windows gives YouTube and YouTube Music a dedicated desktop experience on Windows.
+>
+> It provides a polished app window, persistent sign-in, quick navigation, mini-player support, always-on-top mode, focus mode, system tray integration, mute controls, zoom controls, and keyboard shortcuts.
+>
+> TubeDesk is designed for users who want a focused desktop app experience without browser tab clutter.
+
+**Key features**
+
+- Dedicated desktop window for YouTube and YouTube Music
+- Persistent Google/YouTube login session
+- Quick links for Home, Subscriptions, Music, Trending, History, and Watch Later
+- Mini-player window
+- Always-on-top mode
+- Focus mode
+- System tray support
+- Mute toggle
+- Zoom controls
+- Open current page in external browser
+- Clear local session data
+- Keyboard shortcuts
+
+**Disclaimer**
+
+> TubeDesk for Windows is an unofficial application and is not affiliated with, endorsed by, sponsored by, or approved by Google LLC or YouTube.
+>
+> YouTube and YouTube Music are trademarks of Google LLC.
+
+### (2) Exact `package.json` `appx` example for current Electron/electron-builder setup
+
+Use this exact structure under `build.appx` in `/home/runner/work/youtube-desktop-win/youtube-desktop-win/package.json`:
+
+```json
+"appx": {
+  "applicationId": "TubeDeskForWindows",
+  "backgroundColor": "#0f0f0f",
+  "displayName": "TubeDesk for Windows",
+  "publisher": "CN=<exact-value-from-product-identity-page>",
+  "publisherDisplayName": "Mattias Vinberg",
+  "languages": [
+    "en-US"
+  ],
+  "artifactName": "TubeDesk-for-Windows-Store-${version}.${ext}"
+}
+```
+
+### (3) Final pre-submission checklist (Microsoft Store)
+
+- [ ] Retrieve exact `CN=...` publisher value from **Partner Center → Product identity**
+- [ ] Set `build.appx.publisher` in `package.json` to that exact `CN=...` value
+- [ ] Keep `build.appx.publisherDisplayName` as `"Mattias Vinberg"`
+- [ ] Keep `build.appx.displayName` as `"TubeDesk for Windows"`
+- [ ] Keep `build.appx.languages` as `["en-US"]` (English-only listing/package metadata)
+- [ ] Run `npm ci` and `npm run build:store -- --publish never` on Windows
+- [ ] Confirm generated `.appx`/`.msix` appears in `dist/`
+- [ ] Verify `AppxManifest.xml` identity/publisher/display name match Partner Center
+- [ ] Confirm Store listing text is English-only (`STORE-LISTING.md`)
+- [ ] Confirm privacy policy URL is public and reachable
+- [ ] Upload package in Partner Center and resolve all validation warnings/errors before submit
+
 ## Known Partner Center identity values for this repository
 
 Confirmed account details from Microsoft Partner Center:
