@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YouTube Mini Player</title>
+  <style>
+    body {
+      margin: 0;
+      background: #080808;
+      overflow: hidden;
+      font-family: Segoe UI, Arial, sans-serif;
+    }
+
+    #bar {
+      height: 34px;
+      background: #111;
+      border-bottom: 1px solid #262626;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0 8px;
+      color: #fff;
+      font-size: 12px;
+    }
+
+    button {
+      background: #222;
+      color: #fff;
+      border: 1px solid #333;
+      border-radius: 8px;
+      padding: 4px 8px;
+      cursor: pointer;
+    }
+
+    webview {
+      width: 100vw;
+      height: calc(100vh - 34px);
+      display: inline-flex;
+      background: #080808;
+    }
+  </style>
+</head>
+<body>
+  <div id="bar">
+    <strong>Mini</strong>
+    <button id="home">Hem</button>
+    <button id="music">Music</button>
+  </div>
+
+  <webview
+    id="miniView"
+    src="https://www.youtube.com"
+    partition="persist:youtube"
+    allowpopups>
+  </webview>
+
+  <script>
+    const params = new URLSearchParams(location.search);
+    const initialUrl = params.get("url") || "https://www.youtube.com";
+    const miniView = document.getElementById("miniView");
+    miniView.src = initialUrl;
+
+    document.getElementById("home").addEventListener("click", () => {
+      miniView.src = "https://www.youtube.com";
+    });
+
+    document.getElementById("music").addEventListener("click", () => {
+      miniView.src = "https://music.youtube.com";
+    });
+  </script>
+</body>
+</html>
