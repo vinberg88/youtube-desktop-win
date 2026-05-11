@@ -1,0 +1,41 @@
+{
+  "name": "youtube-desktop-win",
+  "version": "0.3.0",
+  "description": "A feature-rich YouTube desktop wrapper for Windows built with Electron.",
+  "main": "main.js",
+  "author": "Mattias Vinberg",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder --win nsis",
+    "dist": "npm run build"
+  },
+  "build": {
+    "appId": "se.vinberg.youtube-desktop",
+    "productName": "YouTube Desktop",
+    "files": [
+      "main.js",
+      "preload.js",
+      "index.html",
+      "renderer.js",
+      "mini.html",
+      "README.md",
+      "LICENSE",
+      "assets/**/*"
+    ],
+    "win": {
+      "target": "nsis"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "YouTube Desktop"
+    }
+  },
+  "devDependencies": {
+    "electron": "latest",
+    "electron-builder": "latest"
+  }
+}
