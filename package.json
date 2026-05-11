@@ -1,11 +1,11 @@
 {
   "name": "tubedesk-for-windows",
   "private": true,
-  "version": "0.4.3",
+  "version": "0.4.4",
   "description": "A polished, unofficial desktop wrapper for YouTube and YouTube Music on Windows.",
   "main": "main.js",
   "author": "Mattias Vinberg",
-  "companyName": "Mattias Vinberg",
+  "companyName": "youtube-desktop",
   "license": "MIT",
   "engines": {
     "node": ">=22.12.0",
@@ -54,8 +54,9 @@
       "applicationId": "TubeDeskForWindows",
       "backgroundColor": "#0f0f0f",
       "displayName": "TubeDesk for Windows",
-      "publisher": "CN=Vinberg88",
-      "publisherDisplayName": "Mattias Vinberg",
+      "publisher": "CN=0A041C83-6229-4D05-83CD-8D8BF7D93CB5",
+      "publisherDisplayName": "youtube-desktop",
+      "identityName": "youtube-desktop.TubeDeskForWindows",
       "languages": [
         "en-US"
       ],
