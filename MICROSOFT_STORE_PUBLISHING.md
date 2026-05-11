@@ -9,6 +9,15 @@ This guide is tailored to the current `main` setup in this repository:
 
 Assumption: you already have a Microsoft Partner Center account.
 
+## Known Partner Center identity values for this repository
+
+- Provided **Package/Identity Name**: `TubeDesk for Windows`
+- Still required before final submission config can be completed:
+  - **Publisher** (exact Partner Center value, usually `CN=...`)
+  - **Publisher Display Name** (exact Partner Center value)
+
+Do not finalize `build.appx.publisher` for Store submission until those remaining values are confirmed from Partner Center.
+
 ## 1) Reserve/create the app in Partner Center
 
 1. Go to <https://partner.microsoft.com/dashboard>
@@ -17,6 +26,7 @@ Assumption: you already have a Microsoft Partner Center account.
    - Click **Create a new app**
    - Reserve the app name (e.g., `TubeDesk for Windows`)
 4. Open the app entry and note these exact values:
+   - **Package/Identity Name**: for this repository, currently provided as `TubeDesk for Windows`
    - **Package/Identity/Publisher** (e.g., `CN=...`)
    - Publisher display name used by your account
 
