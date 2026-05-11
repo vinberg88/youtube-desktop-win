@@ -1,18 +1,20 @@
 {
-  "name": "youtube-desktop-win",
-  "version": "0.3.0",
-  "description": "A feature-rich YouTube desktop wrapper for Windows built with Electron.",
+  "name": "tubedesk-for-windows",
+  "version": "0.4.0",
+  "description": "A polished, unofficial desktop wrapper for YouTube and YouTube Music on Windows.",
   "main": "main.js",
   "author": "Mattias Vinberg",
   "license": "MIT",
   "scripts": {
     "start": "electron .",
     "build": "electron-builder --win nsis",
+    "build:store": "electron-builder --win appx",
+    "build:all": "electron-builder --win nsis appx",
     "dist": "npm run build"
   },
   "build": {
-    "appId": "se.vinberg.youtube-desktop",
-    "productName": "YouTube Desktop",
+    "appId": "se.vinberg.tubedesk",
+    "productName": "TubeDesk for Windows",
     "files": [
       "main.js",
       "preload.js",
@@ -20,6 +22,8 @@
       "renderer.js",
       "mini.html",
       "README.md",
+      "PRIVACY.md",
+      "STORE-LISTING.md",
       "LICENSE",
       "assets/**/*"
     ],
@@ -32,7 +36,18 @@
       "allowToChangeInstallationDirectory": true,
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
-      "shortcutName": "YouTube Desktop"
+      "shortcutName": "TubeDesk for Windows"
+    },
+    "appx": {
+      "applicationId": "TubeDeskForWindows",
+      "backgroundColor": "#0f0f0f",
+      "displayName": "TubeDesk for Windows",
+      "publisherDisplayName": "Mattias Vinberg",
+      "identityName": "Vinberg88.TubeDeskForWindows",
+      "languages": [
+        "sv-SE",
+        "en-US"
+      ]
     }
   },
   "devDependencies": {
