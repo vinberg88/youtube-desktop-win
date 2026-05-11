@@ -50,7 +50,7 @@ Assumption: you already have a Microsoft Partner Center account.
 
 ### (2) Exact `package.json` `appx` example for current Electron/electron-builder setup
 
-Use this exact structure under `build.appx` in `/home/runner/work/youtube-desktop-win/youtube-desktop-win/package.json`:
+Use this exact structure under `build.appx` in `package.json`:
 
 ```json
 "appx": {
