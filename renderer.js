@@ -34,6 +34,12 @@ function normalizeUrl(value) {
   return input.startsWith("http://") || input.startsWith("https://") ? input : `https://${input}`;
 }
 
+function showStart() {
+  start.classList.remove("hidden");
+  urlInput.value = routes.home;
+  statusEl.textContent = "Startsida";
+}
+
 function go(url) {
   start.classList.add("hidden");
   webview.src = url;
@@ -41,11 +47,11 @@ function go(url) {
 }
 
 function command(cmd) {
-  if (cmd === "home") {
-    start.classList.remove("hidden");
-    urlInput.value = routes.home;
+  if (cmd === "start") {
+    showStart();
     return;
   }
+
   go(routes[cmd] || routes.home);
 }
 
@@ -78,6 +84,7 @@ document.getElementById("back").addEventListener("click", () => webview.canGoBac
 document.getElementById("forward").addEventListener("click", () => webview.canGoForward() && webview.goForward());
 document.getElementById("reload").addEventListener("click", () => webview.reload());
 document.getElementById("home").addEventListener("click", () => command("home"));
+document.getElementById("startBtn").addEventListener("click", () => command("start"));
 document.getElementById("mini").addEventListener("click", () => window.youtubeApp.openMiniPlayer(webview.getURL()));
 document.getElementById("top").addEventListener("click", async () => {
   const enabled = await window.youtubeApp.toggleAlwaysOnTop();
