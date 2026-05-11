@@ -95,13 +95,13 @@ dist/
 
 ## Build Microsoft Store Package
 
-The Store package uses Electron Builder's AppX/MSIX target:
+This repository uses Electron Builder's AppX target:
 
 ```bash
 npm run build:store
 ```
 
-Important: `appx` / Microsoft Store packaging must be built on a real Windows environment. It does **not** work from Ubuntu, Linux, or WSL.
+Important: `appx` packaging must be built on a real Windows environment. It does **not** work from Ubuntu, Linux, or WSL.
 
 Use one of these instead:
 
@@ -117,46 +117,9 @@ Recommended path:
 GitHub → Actions → Build Windows Packages → Run workflow
 ```
 
-Then download the artifact named:
+For a full, exact Microsoft Store submission flow tailored to this repository and current `package.json`/workflow setup, follow:
 
-```text
-TubeDesk-Windows-Store-Package
-```
-
-The repository owner already has a Microsoft Store / Partner Center account, so the remaining work is packaging and submitting the app with the steps below.
-
-### Next steps after Partner Center account setup
-
-This repository is already set up to produce a Store package with `npm run build:store` (or the `Build Windows Packages` workflow). The remaining work is:
-
-1. In Partner Center, open the existing app entry for TubeDesk for Windows (or reserve the app name there before the first submission).
-2. Compare the app identity shown in Partner Center with the current AppX settings in `package.json`:
-
-   | `package.json` field | Current value | What to verify in Partner Center |
-   |---|---|---|
-   | `build.appx.displayName` | `TubeDesk for Windows` | Store-facing app name |
-   | `build.appx.publisher` | `CN=Vinberg88` | Package publisher / certificate subject |
-   | `build.appx.publisherDisplayName` | `Mattias Vinberg` | Publisher display name |
-   | `build.appx.applicationId` | `TubeDeskForWindows` | Stable app identifier used for the package |
-
-   Update the values above only if Partner Center shows different identity details for the app you plan to submit.
-3. Build the Store package on Windows:
-
-   - locally in Windows PowerShell with `npm install` then `npm run build:store`, or
-   - from GitHub Actions by running `Build Windows Packages` and downloading `TubeDesk-Windows-Store-Package`.
-4. In Partner Center, create a new submission and upload the generated `dist/*.appx` or `dist/*.msix` file from that artifact.
-5. Fill in the Store submission content using the repository docs:
-
-   - `STORE-LISTING.md` for the short description, long description, keywords, and screenshot plan
-   - `PRIVACY.md` for the privacy policy text/reference
-
-6. Complete the remaining Partner Center submission fields (screenshots, age rating, category, pricing/availability), then submit for certification.
-
-### Store package notes for this repository
-
-- The Store package is separate from the NSIS installer built by `npm run build`.
-- The GitHub Actions workflow uploads the Store artifact under the name `TubeDesk-Windows-Store-Package`.
-- Linux/macOS/WSL are not suitable for producing the final Store package for this repo's current Electron Builder setup.
+[`MICROSOFT_STORE_PUBLISHING.md`](MICROSOFT_STORE_PUBLISHING.md)
 
 ### Store Limitations
 
