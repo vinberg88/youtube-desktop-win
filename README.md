@@ -95,13 +95,13 @@ dist/
 
 ## Build Microsoft Store Package
 
-The Store package uses Electron Builder's AppX/MSIX target:
+This repository uses Electron Builder's AppX target:
 
 ```bash
 npm run build:store
 ```
 
-Important: `appx` / Microsoft Store packaging must be built on a real Windows environment. It does **not** work from Ubuntu, Linux, or WSL.
+Important: `appx` packaging must be built on a real Windows environment. It does **not** work from Ubuntu, Linux, or WSL.
 
 Use one of these instead:
 
@@ -117,26 +117,9 @@ Recommended path:
 GitHub → Actions → Build Windows Packages → Run workflow
 ```
 
-Then download the artifact named:
+For a full, exact Microsoft Store submission flow tailored to this repository and current `package.json`/workflow setup, follow:
 
-```text
-TubeDesk-Windows-Store-Package
-```
-
-Upload that package in Microsoft Partner Center.
-
-### Store Identity Configuration
-
-The `appx` section in `package.json` must match your Partner Center app registration:
-
-| Field | Purpose |
-|-------|---------|
-| `identityName` | Must match the **Package/Identity/Name** from Partner Center |
-| `publisher` | Must match the **Package/Identity/Publisher** (CN=...) from Partner Center |
-| `publisherDisplayName` | Must match the publisher display name in Partner Center |
-| `applicationId` | Internal app identifier (no spaces or special characters) |
-
-Update `publisher` in `package.json` → `build.appx.publisher` to match your certificate subject before building.
+[`MICROSOFT_STORE_PUBLISHING.md`](MICROSOFT_STORE_PUBLISHING.md)
 
 ### Store Limitations
 
