@@ -52,7 +52,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: TubeDesk-Windows-NSIS
-          path: dist/TubeDesk-for-Windows-Setup-*
+          path: dist/*.exe
           if-no-files-found: error
 
   build-store:
