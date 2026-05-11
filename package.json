@@ -1,7 +1,7 @@
 {
   "name": "tubedesk-for-windows",
   "private": true,
-  "version": "0.4.4",
+  "version": "0.4.5",
   "description": "A polished, unofficial desktop wrapper for YouTube and YouTube Music on Windows.",
   "main": "main.js",
   "author": "Mattias Vinberg",
@@ -14,8 +14,9 @@
   "scripts": {
     "start": "electron .",
     "build": "electron-builder --win nsis --publish never",
+    "build:msi": "electron-builder --win msi --publish never",
     "build:store": "electron-builder --win appx --publish never",
-    "build:all": "electron-builder --win nsis appx --publish never"
+    "build:all": "electron-builder --win nsis msi appx --publish never"
   },
   "build": {
     "appId": "se.vinberg.tubedesk",
@@ -49,6 +50,9 @@
       "uninstallDisplayName": "TubeDesk for Windows",
       "artifactName": "TubeDesk-for-Windows-Setup-${version}.${ext}",
       "include": "build/installer.nsh"
+    },
+    "msi": {
+      "artifactName": "TubeDesk-for-Windows-${version}.${ext}"
     },
     "appx": {
       "applicationId": "TubeDeskForWindows",
