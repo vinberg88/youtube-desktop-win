@@ -1,9 +1,10 @@
-const webview = document.getElementById("youtube");
+let webview = document.getElementById("youtube");
 const urlInput = document.getElementById("url");
 const start = document.getElementById("start");
 const progress = document.getElementById("progress");
 const statusEl = document.getElementById("status");
 const toastEl = document.getElementById("toast");
+const contentEl = document.querySelector(".content");
 
 const routes = {
   home: "https://www.youtube.com",
@@ -34,6 +35,61 @@ function normalizeUrl(value) {
   return input.startsWith("http://") || input.startsWith("https://") ? input : `https://${input}`;
 }
 
+function getHost(value) {
+  try {
+    return new URL(value).hostname;
+  } catch {
+    return "";
+  }
+}
+
+function shouldRecreateWebview(currentUrl, nextUrl) {
+  const currentHost = getHost(currentUrl);
+  const nextHost = getHost(nextUrl);
+  const currentIsMusic = currentHost === "music.youtube.com";
+  const nextIsMusic = nextHost === "music.youtube.com";
+
+  return currentIsMusic !== nextIsMusic;
+}
+
+function attachWebviewEvents() {
+  webview.addEventListener("did-start-loading", () => {
+    progress.style.width = "45%";
+    statusEl.textContent = "Laddar...";
+  });
+
+  webview.addEventListener("did-stop-loading", () => {
+    progress.style.width = "100%";
+    setTimeout(() => (progress.style.width = "0"), 250);
+    statusEl.textContent = webview.getTitle() || "Redo";
+    webview.setZoomFactor(zoom);
+    webview.setAudioMuted(muted);
+  });
+
+  webview.addEventListener("did-navigate", (e) => {
+    urlInput.value = e.url;
+  });
+
+  webview.addEventListener("did-navigate-in-page", (e) => {
+    urlInput.value = e.url;
+  });
+}
+
+function recreateWebview(url) {
+  const nextWebview = document.createElement("webview");
+  nextWebview.id = "youtube";
+  nextWebview.setAttribute("partition", "persist:youtube");
+  nextWebview.setAttribute("allowpopups", "");
+  nextWebview.src = url;
+
+  webview.replaceWith(nextWebview);
+  webview = nextWebview;
+  attachWebviewEvents();
+
+  webview.setZoomFactor(zoom);
+  webview.setAudioMuted(muted);
+}
+
 function showStart() {
   start.classList.remove("hidden");
   urlInput.value = routes.home;
@@ -42,7 +98,15 @@ function showStart() {
 
 function go(url) {
   start.classList.add("hidden");
-  webview.src = url;
+
+  const currentUrl = webview.getURL ? webview.getURL() : webview.src;
+  if (shouldRecreateWebview(currentUrl, url)) {
+    recreateWebview(url);
+    toast(getHost(url) === "music.youtube.com" ? "Växlar till YouTube Music" : "Växlar till YouTube Videos");
+  } else {
+    webview.src = url;
+  }
+
   urlInput.value = url;
 }
 
@@ -101,10 +165,7 @@ document.getElementById("zoomReset").addEventListener("click", () => setZoom(1))
 
 document.querySelectorAll("[data-cmd]").forEach((el) => el.addEventListener("click", () => command(el.dataset.cmd)));
 
-webview.addEventListener("did-start-loading", () => { progress.style.width = "45%"; statusEl.textContent = "Laddar..."; });
-webview.addEventListener("did-stop-loading", () => { progress.style.width = "100%"; setTimeout(() => (progress.style.width = "0"), 250); statusEl.textContent = webview.getTitle() || "Redo"; });
-webview.addEventListener("did-navigate", (e) => { urlInput.value = e.url; });
-webview.addEventListener("did-navigate-in-page", (e) => { urlInput.value = e.url; });
+attachWebviewEvents();
 
 window.youtubeApp.onCommand(command);
 window.youtubeApp.onAlwaysOnTopChanged((enabled) => {
