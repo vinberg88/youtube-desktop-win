@@ -83,6 +83,13 @@ The one field that must be updated before submission is `build.appx.publisher`. 
 
 > All other `appx` fields already match the confirmed Partner Center account details.
 
+## 2.5) Signing and certificate considerations
+
+- Keep the package identity aligned even if the final Store-distributed package is handled through Partner Center.
+- If you sign locally before submission, use a certificate whose subject matches `build.appx.publisher`.
+- If you rely on Partner Center signing, the package publisher and reserved Store identity still need to match exactly.
+- Any mismatch between package identity, publisher, and signing certificate subject can cause Store validation or certification failure.
+
 ## 3) Build the Store package on Windows
 
 `appx` builds must run on Windows.
@@ -100,7 +107,7 @@ The one field that must be updated before submission is `build.appx.publisher`. 
 From repository root:
 
 ```powershell
-npm install
+npm ci
 npm run build:store -- --publish never
 ```
 
@@ -149,6 +156,14 @@ In Partner Center submission, you will need:
    - Rebuild package on Windows.
    - Create a new submission and upload the new package.
 3. When certification passes, Microsoft publishes the app per your availability settings.
+
+## Recommended release order
+
+1. Finalize version and changelog
+2. Build and verify the NSIS installer
+3. Build and verify the Store package
+4. Submit to Partner Center
+5. Publish the corresponding GitHub release/install artifacts
 
 ## Repository-specific checklist before every Store submission
 
