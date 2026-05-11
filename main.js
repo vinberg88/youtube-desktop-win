@@ -7,6 +7,7 @@ let tray;
 let isAlwaysOnTop = false;
 let focusMode = false;
 
+const appDisplayName = "TubeDesk for Windows";
 const iconPath = path.join(__dirname, "assets", "icon.ico");
 const windowIcon = fs.existsSync(iconPath) ? iconPath : undefined;
 const youtubePartition = "persist:youtube";
@@ -46,7 +47,7 @@ function createWindow() {
     height: 860,
     minWidth: 980,
     minHeight: 640,
-    title: "YouTube Desktop",
+    title: appDisplayName,
     backgroundColor: "#080808",
     autoHideMenuBar: true,
     icon: windowIcon,
@@ -79,7 +80,7 @@ function createWindow() {
     if (!app.isQuitting) {
       event.preventDefault();
       mainWindow.hide();
-      showNotification("YouTube Desktop kör i system tray", "Dubbelklicka på ikonen för att öppna igen.");
+      showNotification(`${appDisplayName} kör i system tray`, "Dubbelklicka på ikonen för att öppna igen.");
     }
   });
 
@@ -149,7 +150,7 @@ function createTray() {
     }
   ]);
 
-  tray.setToolTip("YouTube Desktop");
+  tray.setToolTip(appDisplayName);
   tray.setContextMenu(contextMenu);
 
   tray.on("double-click", () => {
@@ -199,7 +200,7 @@ ipcMain.handle("open-mini-player", (_event, url) => {
     height: 300,
     minWidth: 380,
     minHeight: 240,
-    title: "YouTube Mini Player",
+    title: "TubeDesk Mini Player",
     backgroundColor: "#080808",
     alwaysOnTop: true,
     autoHideMenuBar: true,
@@ -228,17 +229,18 @@ ipcMain.handle("open-external", (_event, url) => {
 });
 
 ipcMain.handle("show-notification", (_event, title, body) => {
-  showNotification(String(title || "YouTube Desktop"), String(body || ""));
+  showNotification(String(title || appDisplayName), String(body || ""));
   return true;
 });
 
 ipcMain.handle("get-app-info", () => ({
-  name: app.getName(),
+  name: appDisplayName,
   version: app.getVersion(),
   partition: youtubePartition
 }));
 
 app.whenReady().then(() => {
+  app.setName(appDisplayName);
   app.isQuitting = false;
   createWindow();
   createTray();
