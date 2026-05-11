@@ -1,6 +1,6 @@
 {
   "name": "tubedesk-for-windows",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "A polished, unofficial desktop wrapper for YouTube and YouTube Music on Windows.",
   "main": "main.js",
   "author": "Mattias Vinberg",
@@ -42,7 +42,8 @@
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
       "shortcutName": "TubeDesk for Windows",
-      "artifactName": "TubeDesk-for-Windows-Setup-${version}.${ext}"
+      "artifactName": "TubeDesk-for-Windows-Setup-${version}.${ext}",
+      "include": "build/installer.nsh"
     },
     "appx": {
       "applicationId": "TubeDeskForWindows",
