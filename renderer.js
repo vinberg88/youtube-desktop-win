@@ -174,7 +174,8 @@ window.youtubeApp.onAlwaysOnTopChanged((enabled) => {
 });
 window.youtubeApp.onFocusModeChanged(setFocusMode);
 window.youtubeApp.getAppInfo().then((info) => {
-  document.getElementById("appInfo").textContent = `v${info.version} · ${info.partition}`;
+  const storeLabel = info.isWindowsStore ? " · Store" : "";
+  document.getElementById("appInfo").textContent = `v${info.version} · ${info.partition}${storeLabel}`;
 });
 
 document.addEventListener("keydown", (event) => {

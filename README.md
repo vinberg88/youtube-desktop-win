@@ -125,6 +125,27 @@ TubeDesk-Windows-Store-Package
 
 Upload that package in Microsoft Partner Center.
 
+### Store Identity Configuration
+
+The `appx` section in `package.json` must match your Partner Center app registration:
+
+| Field | Purpose |
+|-------|---------|
+| `identityName` | Must match the **Package/Identity/Name** from Partner Center |
+| `publisher` | Must match the **Package/Identity/Publisher** (CN=...) from Partner Center |
+| `publisherDisplayName` | Must match the publisher display name in Partner Center |
+| `applicationId` | Internal app identifier (no spaces or special characters) |
+
+Update `publisher` in `package.json` → `build.appx.publisher` to match your certificate subject before building.
+
+### Store Limitations
+
+When running as a Store app (`process.windowsStore === true`):
+
+- Global keyboard shortcuts are disabled (OS-level shortcuts are restricted in AppX sandbox)
+- The AppUserModelId is managed by Windows automatically
+- All other features (tray, notifications, webview, mini-player) work normally
+
 ## Project Structure
 
 ```text

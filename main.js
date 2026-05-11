@@ -7,6 +7,7 @@ let tray;
 let isAlwaysOnTop = false;
 let focusMode = false;
 
+const isWindowsStore = process.windowsStore || false;
 const appDisplayName = "TubeDesk for Windows";
 const iconPath = path.join(__dirname, "assets", "icon.ico");
 const windowIcon = fs.existsSync(iconPath) ? iconPath : undefined;
@@ -159,11 +160,16 @@ function createTray() {
 }
 
 function registerShortcuts() {
-  globalShortcut.register("CommandOrControl+Shift+Y", () => {
-    if (!mainWindow) return;
-    if (mainWindow.isVisible()) mainWindow.hide();
-    else mainWindow.show();
-  });
+  if (isWindowsStore) return;
+  try {
+    globalShortcut.register("CommandOrControl+Shift+Y", () => {
+      if (!mainWindow) return;
+      if (mainWindow.isVisible()) mainWindow.hide();
+      else mainWindow.show();
+    });
+  } catch {
+    // Global shortcuts may fail in sandboxed Store environment
+  }
 }
 
 function showNotification(title, body) {
@@ -236,10 +242,14 @@ ipcMain.handle("show-notification", (_event, title, body) => {
 ipcMain.handle("get-app-info", () => ({
   name: appDisplayName,
   version: app.getVersion(),
-  partition: youtubePartition
+  partition: youtubePartition,
+  isWindowsStore
 }));
 
 app.whenReady().then(() => {
+  if (!isWindowsStore) {
+    app.setAppUserModelId("se.vinberg.tubedesk");
+  }
   app.setName(appDisplayName);
   app.isQuitting = false;
   createWindow();
