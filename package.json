@@ -16,7 +16,6 @@
   "build": {
     "appId": "se.vinberg.tubedesk",
     "productName": "TubeDesk for Windows",
-    "publisherName": "Mattias Vinberg",
     "copyright": "Copyright © 2026 Mattias Vinberg",
     "files": [
       "main.js",
@@ -33,7 +32,7 @@
     "win": {
       "target": "nsis",
       "icon": "assets/icon.ico",
-      "publisherName": "Mattias Vinberg"
+      "legalTrademarks": "TubeDesk for Windows is an unofficial app. YouTube and YouTube Music are trademarks of Google LLC."
     },
     "nsis": {
       "oneClick": false,
