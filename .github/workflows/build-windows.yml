@@ -33,7 +33,7 @@ jobs:
         run: npm install
 
       - name: Build NSIS installer
-        run: npm run build
+        run: npm run build -- --publish never
 
       - name: Upload NSIS artifact
         uses: actions/upload-artifact@v4
@@ -58,7 +58,7 @@ jobs:
         run: npm install
 
       - name: Build Microsoft Store package
-        run: npm run build:store
+        run: npm run build:store -- --publish never
 
       - name: Upload Store artifact
         uses: actions/upload-artifact@v4
