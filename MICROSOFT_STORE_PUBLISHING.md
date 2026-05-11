@@ -11,12 +11,43 @@ Assumption: you already have a Microsoft Partner Center account.
 
 ## Known Partner Center identity values for this repository
 
-- Provided **Package/Identity Name**: `TubeDesk for Windows`
-- Still required before final submission config can be completed:
-  - **Publisher** (exact Partner Center value, usually `CN=...`)
-  - **Publisher Display Name** (exact Partner Center value)
+Confirmed account details from Microsoft Partner Center:
 
-Do not finalize `build.appx.publisher` for Store submission until those remaining values are confirmed from Partner Center.
+| Field | Value |
+|---|---|
+| Publisher name / Publisher Display Name | `Mattias Vinberg` |
+| Account type | Individual |
+| Account status | Active |
+| Windows phone publisher ID (GUID) | `576bb53a-ae72-4179-9e13-98a74cc8fe32` |
+
+The `build.appx.publisherDisplayName` in `package.json` is already set to `Mattias Vinberg` — no change needed there.
+
+### What still needs to be retrieved before final submission
+
+The **Package/Identity Publisher** (`CN=...`) is a per-app value shown on the app's **Product identity** page in Partner Center — it is different from the account-level publisher name. You must retrieve this exact value to set `build.appx.publisher` correctly.
+
+**How to find it:**
+
+1. Go to <https://partner.microsoft.com/dashboard>
+2. Open **Apps and games** → open your app (e.g., `TubeDesk for Windows`)
+3. In the left menu, go to **Product management** → **Product identity** (or look for **Package/Identity**)
+4. Copy the exact value shown next to **Publisher** — it looks like `CN=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX`
+
+Once you have that value, update `package.json`:
+
+```json
+"build": {
+  "appx": {
+    "publisher": "CN=<exact-value-from-product-identity-page>"
+  }
+}
+```
+
+> **Note:** For Individual accounts, the publisher CN often contains your Windows phone publisher GUID
+> (`576bb53a-ae72-4179-9e13-98a74cc8fe32`) in the format `CN=<GUID-in-uppercase>`, but the exact format
+> varies by account. Always copy the precise value from the Product identity page rather than constructing it manually.
+
+Do not finalize `build.appx.publisher` for Store submission until the exact `CN=...` value is confirmed from the app's Product identity page in Partner Center.
 
 ## 1) Reserve/create the app in Partner Center
 
@@ -34,23 +65,23 @@ Do not finalize `build.appx.publisher` for Store submission until those remainin
 
 Open `package.json` and verify:
 
-- `build.productName` = Store display name (e.g., `TubeDesk for Windows`)
-- `build.appx.displayName` = same Store display name
-- `build.appx.publisher` = exact Partner Center **Package/Identity/Publisher** (`CN=...`)
-- `build.appx.publisherDisplayName` = your Partner Center publisher display name
-- `build.appx.applicationId` = stable app identifier (keep it stable once published)
+- `build.productName` = Store display name → currently `"TubeDesk for Windows"` ✓
+- `build.appx.displayName` = same Store display name → currently `"TubeDesk for Windows"` ✓
+- `build.appx.publisher` = exact Partner Center **Package/Identity/Publisher** (`CN=...`) → **⚠ must be updated** (see "What still needs to be retrieved" section above)
+- `build.appx.publisherDisplayName` = Partner Center publisher display name → currently `"Mattias Vinberg"` ✓
+- `build.appx.applicationId` = stable app identifier → currently `"TubeDeskForWindows"` ✓ (keep stable once published)
 
-Current repository value to update before submission:
+The one field that must be updated before submission is `build.appx.publisher`. Replace the current placeholder with the exact `CN=...` value from the app's Product identity page in Partner Center:
 
 ```json
 "build": {
   "appx": {
-    "publisher": "CN=Vinberg88"
+    "publisher": "CN=<exact-value-from-product-identity-page>"
   }
 }
 ```
 
-Replace that `publisher` value with the exact Partner Center value if different.
+> All other `appx` fields already match the confirmed Partner Center account details.
 
 ## 3) Build the Store package on Windows
 
@@ -121,9 +152,12 @@ In Partner Center submission, you will need:
 
 ## Repository-specific checklist before every Store submission
 
+- [ ] Retrieve exact `CN=...` publisher value from app's Product identity page in Partner Center
+- [ ] Set `build.appx.publisher` to that `CN=...` value in `package.json`
 - [ ] `npm run build:store` succeeds on Windows
-- [ ] `build.appx.publisher` exactly matches Partner Center publisher
-- [ ] AppxManifest identity/display values verified
+- [ ] `build.appx.publisher` exactly matches Partner Center publisher (`CN=...`)
+- [ ] `build.appx.publisherDisplayName` is `"Mattias Vinberg"` ✓ (already correct)
+- [ ] AppxManifest identity/display values verified (see step 4)
 - [ ] `STORE-LISTING.md` text is up to date
 - [ ] Privacy policy URL is public and reachable
 - [ ] Store screenshots/assets are ready
