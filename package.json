@@ -13,9 +13,9 @@
   },
   "scripts": {
     "start": "electron .",
-    "build": "electron-builder --win nsis",
-    "build:store": "electron-builder --win appx",
-    "build:all": "electron-builder --win nsis appx"
+    "build": "electron-builder --win nsis --publish never",
+    "build:store": "electron-builder --win appx --publish never",
+    "build:all": "electron-builder --win nsis appx --publish never"
   },
   "build": {
     "appId": "se.vinberg.tubedesk",
