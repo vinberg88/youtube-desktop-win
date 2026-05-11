@@ -1,0 +1,70 @@
+name: Build Windows Packages
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "package.json"
+      - "package-lock.json"
+      - "main.js"
+      - "preload.js"
+      - "renderer.js"
+      - "index.html"
+      - "mini.html"
+      - "assets/**"
+      - ".github/workflows/build-windows.yml"
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build NSIS installer
+        run: npm run build
+
+      - name: Upload NSIS artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: TubeDesk-Windows-NSIS
+          path: dist/*
+          if-no-files-found: error
+
+  build-store:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Microsoft Store package
+        run: npm run build:store
+
+      - name: Upload Store artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: TubeDesk-Windows-Store-Package
+          path: dist/*
+          if-no-files-found: error
