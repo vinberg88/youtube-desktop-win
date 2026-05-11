@@ -70,6 +70,7 @@ Open `package.json` and verify:
 - `build.appx.publisher` = exact Partner Center **Package/Identity/Publisher** (`CN=...`) → **⚠ must be updated** (see "What still needs to be retrieved" section above)
 - `build.appx.publisherDisplayName` = Partner Center publisher display name → currently `"Mattias Vinberg"` ✓
 - `build.appx.applicationId` = stable app identifier → currently `"TubeDeskForWindows"` ✓ (keep stable once published)
+- `build.appx.languages` = supported Store package languages → keep only `"en-US"` ✓
 
 The one field that must be updated before submission is `build.appx.publisher`. Replace the current placeholder with the exact `CN=...` value from the app's Product identity page in Partner Center:
 
@@ -130,13 +131,15 @@ Confirm the manifest identity/publisher/display name matches Partner Center.
 In Partner Center submission, you will need:
 
 1. **Descriptions and text**
-   Use/adapt `STORE-LISTING.md`.
+   Use/adapt `STORE-LISTING.md`. Keep all Store text in English only.
 2. **Privacy policy URL**
    Host `PRIVACY.md` on a public URL and use that URL in Partner Center.
 3. **Store images/screenshots**
-   Prepare required Store asset sizes/screenshots.
+   Prepare required Store asset sizes/screenshots and keep any visible text in English only.
 4. **Category and age rating answers**
    Choose category (Entertainment/Music is typically appropriate for this app).
+
+Also keep any submission notes, release notes, and other Partner Center text fields in English only so they match the repository documentation and `en-US` package language metadata.
 
 ## 6) Create and complete the submission in Partner Center
 
@@ -172,7 +175,8 @@ In Partner Center submission, you will need:
 - [ ] `npm run build:store` succeeds on Windows
 - [ ] `build.appx.publisher` exactly matches Partner Center publisher (`CN=...`)
 - [ ] `build.appx.publisherDisplayName` is `"Mattias Vinberg"` ✓ (already correct)
+- [ ] `build.appx.languages` is `["en-US"]`
 - [ ] AppxManifest identity/display values verified (see step 4)
-- [ ] `STORE-LISTING.md` text is up to date
+- [ ] `STORE-LISTING.md` text is up to date and remains English only
 - [ ] Privacy policy URL is public and reachable
-- [ ] Store screenshots/assets are ready
+- [ ] Store screenshots/assets are ready and use English only where text appears

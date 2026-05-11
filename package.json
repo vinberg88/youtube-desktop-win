@@ -57,7 +57,6 @@
       "publisher": "CN=Vinberg88",
       "publisherDisplayName": "Mattias Vinberg",
       "languages": [
-        "sv-SE",
         "en-US"
       ],
       "artifactName": "TubeDesk-for-Windows-Store-${version}.${ext}"
