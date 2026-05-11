@@ -3,8 +3,8 @@
 
 !macro WriteTubeDeskArpMetadata ROOT KEY
   WriteRegStr ${ROOT} "${KEY}" "DisplayName" "TubeDesk for Windows"
-  WriteRegStr ${ROOT} "${KEY}" "DisplayVersion" "0.4.3"
-  WriteRegStr ${ROOT} "${KEY}" "Publisher" "Mattias Vinberg"
+  WriteRegStr ${ROOT} "${KEY}" "DisplayVersion" "0.4.6"
+  WriteRegStr ${ROOT} "${KEY}" "Publisher" "youtube-desktop"
   WriteRegStr ${ROOT} "${KEY}" "InstallLocation" "$INSTDIR"
   WriteRegStr ${ROOT} "${KEY}" "DisplayIcon" "$INSTDIR\TubeDesk for Windows.exe"
   WriteRegStr ${ROOT} "${KEY}" "UninstallString" '"$INSTDIR\Uninstall TubeDesk for Windows.exe"'
