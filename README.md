@@ -129,6 +129,8 @@ Upload that package in Microsoft Partner Center.
 
 Before building for Microsoft Store, make sure the values under `build.appx` in `package.json` match the package identity and publisher registered in Partner Center.
 
+For this repository, keep Microsoft Store copy and package language metadata in English only (`en-US`). That includes the Partner Center listing, release/submission notes, screenshots with text, and `build.appx.languages`.
+
 For the full release and Store publication workflow, see:
 
 - [`RELEASE-CHECKLIST.md`](RELEASE-CHECKLIST.md)

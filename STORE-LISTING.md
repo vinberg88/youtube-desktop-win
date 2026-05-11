@@ -1,5 +1,7 @@
 # Microsoft Store Listing Draft
 
+Use this draft as the English-only Microsoft Store listing for TubeDesk for Windows.
+
 ## App name
 
 TubeDesk for Windows
