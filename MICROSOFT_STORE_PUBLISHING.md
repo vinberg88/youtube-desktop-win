@@ -22,7 +22,7 @@ Assumption: you already have a Microsoft Partner Center account.
 
 ## 2) Align `package.json` with Partner Center identity
 
-Open `/home/runner/work/youtube-desktop-win/youtube-desktop-win/package.json` and verify:
+Open `package.json` and verify:
 
 - `build.productName` = Store display name (for example `TubeDesk for Windows`)
 - `build.appx.displayName` = same Store display name
@@ -82,9 +82,9 @@ Confirm the manifest identity/publisher/display name matches Partner Center.
 In Partner Center submission, you will need:
 
 1. **Descriptions and text**  
-   Use/adapt `/home/runner/work/youtube-desktop-win/youtube-desktop-win/STORE-LISTING.md`.
+   Use/adapt `STORE-LISTING.md`.
 2. **Privacy policy URL**  
-   Host `/home/runner/work/youtube-desktop-win/youtube-desktop-win/PRIVACY.md` on a public URL and use that URL in Partner Center.
+   Host `PRIVACY.md` on a public URL and use that URL in Partner Center.
 3. **Store images/screenshots**  
    Prepare required Store asset sizes/screenshots.
 4. **Category and age rating answers**  
