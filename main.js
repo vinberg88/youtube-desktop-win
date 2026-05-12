@@ -8,7 +8,7 @@ let isAlwaysOnTop = false;
 let focusMode = false;
 
 const isWindowsStore = process.windowsStore || false;
-const appDisplayName = "TubeDesk for Windows";
+const appDisplayName = "TubeDesk";
 const iconPath = path.join(__dirname, "assets", "icon.ico");
 const windowIcon = fs.existsSync(iconPath) ? iconPath : undefined;
 const youtubePartition = "persist:youtube";

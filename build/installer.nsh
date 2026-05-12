@@ -1,14 +1,14 @@
-!define TUBEDESK_UNINSTALL_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\TubeDesk for Windows"
+!define TUBEDESK_UNINSTALL_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\TubeDesk"
 !define TUBEDESK_APP_ID_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\se.vinberg.tubedesk"
 
 !macro WriteTubeDeskArpMetadata ROOT KEY
-  WriteRegStr ${ROOT} "${KEY}" "DisplayName" "TubeDesk for Windows"
+  WriteRegStr ${ROOT} "${KEY}" "DisplayName" "TubeDesk"
   WriteRegStr ${ROOT} "${KEY}" "DisplayVersion" "0.4.7"
   WriteRegStr ${ROOT} "${KEY}" "Publisher" "youtube-desktop"
   WriteRegStr ${ROOT} "${KEY}" "InstallLocation" "$INSTDIR"
-  WriteRegStr ${ROOT} "${KEY}" "DisplayIcon" "$INSTDIR\TubeDesk for Windows.exe"
-  WriteRegStr ${ROOT} "${KEY}" "UninstallString" '"$INSTDIR\Uninstall TubeDesk for Windows.exe"'
-  WriteRegStr ${ROOT} "${KEY}" "QuietUninstallString" '"$INSTDIR\Uninstall TubeDesk for Windows.exe" /S'
+  WriteRegStr ${ROOT} "${KEY}" "DisplayIcon" "$INSTDIR\TubeDesk.exe"
+  WriteRegStr ${ROOT} "${KEY}" "UninstallString" '"$INSTDIR\Uninstall TubeDesk.exe"'
+  WriteRegStr ${ROOT} "${KEY}" "QuietUninstallString" '"$INSTDIR\Uninstall TubeDesk.exe" /S'
   WriteRegStr ${ROOT} "${KEY}" "URLInfoAbout" "https://github.com/vinberg88/youtube-desktop-win"
   WriteRegStr ${ROOT} "${KEY}" "HelpLink" "https://github.com/vinberg88/youtube-desktop-win/issues"
   WriteRegDWORD ${ROOT} "${KEY}" "NoModify" 1
