@@ -139,6 +139,14 @@ For the full release and Store publication workflow, see:
 - [`RELEASE-CHECKLIST.md`](RELEASE-CHECKLIST.md)
 - [`MICROSOFT_STORE_PUBLISHING.md`](MICROSOFT_STORE_PUBLISHING.md)
 
+### Microsoft Store Publishing Guide
+
+A practical, step-by-step guide for preparing and submitting TubeDesk for Windows to Microsoft Store is available here:
+
+https://vinberg88.github.io/tubedesk-store-guide/
+
+This guide documents the Store submission path, package notes, signing lessons, and validation details discovered while preparing TubeDesk.
+
 ### Store Limitations
 
 When running as a Store app (`process.windowsStore === true`):
