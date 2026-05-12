@@ -270,4 +270,7 @@ MIT License. See [`LICENSE`](LICENSE).
 
 <img width="1245" height="762" alt="musik" src="https://github.com/user-attachments/assets/cff2ed15-78ba-4d58-bd53-1f920e893636" />
 
+<img width="1280" height="800" alt="front" src="https://github.com/user-attachments/assets/b1c96c35-08d7-4cc5-8a59-fa0b280b59c8" />
+
+
 
