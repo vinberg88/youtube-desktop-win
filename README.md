@@ -1,4 +1,7 @@
-# TubeDesk for Windows
+# TubeDesk for Windows 
+
+<img width="300" height="300" alt="TubeDesk-Logo-300" src="https://github.com/user-attachments/assets/37c37c1e-15b6-4412-84a5-af474aea76b5" />
+
 
 > A polished, unofficial Electron-based desktop wrapper for YouTube and YouTube Music on Windows — with persistent login, mini-player, system tray, shortcuts, focus mode, and a custom power-user interface.
 
