@@ -1,7 +1,7 @@
 {
   "name": "tubedesk-for-windows",
   "private": true,
-  "version": "0.4.6",
+  "version": "0.4.7",
   "description": "A polished, unofficial desktop wrapper for YouTube and YouTube Music on Windows.",
   "main": "main.js",
   "author": "youtube-desktop",
