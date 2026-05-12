@@ -266,3 +266,8 @@ npm run build
 ## License
 
 MIT License. See [`LICENSE`](LICENSE).
+
+
+<img width="1245" height="762" alt="musik" src="https://github.com/user-attachments/assets/cff2ed15-78ba-4d58-bd53-1f920e893636" />
+
+
