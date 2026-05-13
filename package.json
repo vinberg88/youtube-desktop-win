@@ -1,11 +1,11 @@
 {
   "name": "tubedesk-for-windows",
   "private": true,
-  "version": "0.4.8",
-  "description": "A polished, unofficial desktop wrapper for YouTube and YouTube Music on Windows.",
+  "version": "0.4.9",
+  "description": "A focused desktop shell for web video and music workflows on Windows.",
   "main": "main.js",
-  "author": "youtube-desktop",
-  "companyName": "youtube-desktop",
+  "author": "Mattias Vinberg",
+  "companyName": "Mattias Vinberg",
   "license": "MIT",
   "engines": {
     "node": ">=22.12.0",
@@ -21,7 +21,7 @@
   "build": {
     "appId": "se.vinberg.tubedesk",
     "productName": "TubeDesk",
-    "copyright": "Copyright © 2026 youtube-desktop / Mattias Vinberg",
+    "copyright": "Copyright © 2026 Mattias Vinberg",
     "files": [
       "main.js",
       "preload.js",
@@ -37,7 +37,7 @@
     "win": {
       "target": "nsis",
       "icon": "assets/icon.ico",
-      "legalTrademarks": "TubeDesk is an unofficial app. YouTube and YouTube Music are trademarks of Google LLC."
+      "legalTrademarks": "TubeDesk is an independent desktop shell. Third-party service names and trademarks belong to their respective owners."
     },
     "nsis": {
       "oneClick": false,
@@ -59,8 +59,8 @@
       "backgroundColor": "#0f0f0f",
       "displayName": "TubeDesk",
       "publisher": "CN=0A041C83-6229-4D05-83CD-8D8BF7D93CB5",
-      "publisherDisplayName": "youtube-desktop",
-      "identityName": "youtube-desktop.TubeDesk",
+      "publisherDisplayName": "Mattias Vinberg",
+      "identityName": "MattiasVinberg.TubeDesk",
       "languages": [
         "en-US"
       ],
