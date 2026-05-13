@@ -1,26 +1,26 @@
 # Microsoft Store Listing Draft
 
-Use this draft as the English-only Microsoft Store listing for TubeDesk for Windows.
+Use this draft as the English-only Microsoft Store listing for TubeDesk.
 
 ## App name
 
-TubeDesk for Windows
+TubeDesk
 
 ## Short description
 
-A focused desktop shell for web video and music, with mini-player, focus mode, tray support, and quick navigation.
+A focused desktop shell for web video and music workflows with mini-player, focus mode, tray support, and quick navigation.
 
 ## Long description
 
-TubeDesk for Windows is a focused desktop shell for web-based video and music services.
+TubeDesk is a focused desktop shell for web-based video and music workflows.
 
 It gives users a dedicated desktop-style window with quick navigation, persistent local session support, mini-player mode, focus mode, always-on-top mode, mute and zoom controls, keyboard shortcuts, and system tray integration.
 
 TubeDesk is designed for users who prefer a clean, app-like desktop workspace instead of managing media pages inside regular browser tabs.
 
-This app is not a downloader, ad blocker, media extractor, scraping tool, DRM circumvention tool, or Premium bypass tool. It does not modify, scrape, or circumvent third-party services.
+This app is not a downloader, ad blocker, media extractor, scraping tool, DRM circumvention tool, or paid-service bypass tool. It does not modify, scrape, or circumvent third-party services.
 
-TubeDesk for Windows is an independent, unofficial application. It is not affiliated with, endorsed by, sponsored by, or approved by Google LLC or YouTube. YouTube and YouTube Music are trademarks of Google LLC.
+TubeDesk is an independent application. Third-party services, brands, product names, and trademarks belong to their respective owners.
 
 ## Key features
 
@@ -43,9 +43,9 @@ TubeDesk adds desktop-specific value around web media usage: a dedicated Windows
 
 ## Disclaimer
 
-TubeDesk for Windows is an independent and unofficial application. It is not affiliated with, endorsed by, sponsored by, or approved by Google LLC or YouTube.
+TubeDesk is an independent desktop shell. It is not affiliated with, endorsed by, sponsored by, or approved by any third-party media service provider.
 
-YouTube and YouTube Music are trademarks of Google LLC. All third-party content and services are provided by their respective owners.
+All third-party product names, trademarks, content, and services are provided by their respective owners.
 
 ## Store category suggestion
 
@@ -70,16 +70,20 @@ TubeDesk does not collect, sell, share, or transmit personal data to the develop
 
 ## Keywords
 
-desktop media, video, music, web player, mini player, focus mode, tray, media shell, TubeDesk, Windows
+desktop media, video, music, web player, mini player, focus mode, tray
 
-## Certification notes for Policy 10.1.1.4 resubmission
+## Certification notes for resubmission
 
-We updated the Store listing and positioning to address Microsoft Store Policy 10.1.1.4.
+We updated the Store listing, metadata, and positioning to address Microsoft Store feedback about inaccurate representation, restricted keywords, and publisher-name clarity.
 
-TubeDesk for Windows is now described as an independent desktop shell for web-based video and music services, not as an official YouTube or Google product.
+The listing no longer uses third-party product titles as keywords. Keywords are limited to seven relevant generic terms: desktop media, video, music, web player, mini player, focus mode, tray.
 
-The listing avoids implying affiliation, endorsement, sponsorship, or approval by Google LLC or YouTube. The app description includes a clear disclaimer that TubeDesk is unofficial and independent.
+The publisher metadata was changed away from a third-party-product-like name to a neutral individual publisher identity.
 
-The app does not provide downloading, ad blocking, scraping, DRM circumvention, Premium bypass, or content extraction. Its distinct functionality is a focused Windows desktop shell with quick navigation, persistent local browser session, mini-player, focus mode, always-on-top, mute/zoom controls, keyboard shortcuts, and system tray support.
+TubeDesk is described as an independent desktop shell for web-based video and music workflows, not as an official app for any third-party service.
 
-Store assets and screenshots should use TubeDesk branding and avoid presenting official third-party branding as the main product identity.
+The listing avoids implying affiliation, endorsement, sponsorship, or approval by any third-party service provider. The app description includes a clear disclaimer that TubeDesk is independent and that third-party names and trademarks belong to their respective owners.
+
+The app does not provide downloading, ad blocking, scraping, DRM circumvention, paid-service bypass, or content extraction. Its distinct functionality is a focused Windows desktop shell with quick navigation, persistent local browser session, mini-player, focus mode, always-on-top, mute/zoom controls, keyboard shortcuts, and system tray support.
+
+Store assets and screenshots should use TubeDesk branding and avoid presenting third-party branding as the main product identity.
