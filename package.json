@@ -64,8 +64,7 @@
       "languages": [
         "en-US"
       ],
-      "artifactName": "TubeDesk-Store-${version}.${ext}",
-      "assets": "assets"
+      "artifactName": "TubeDesk-Store-${version}.${ext}"
     }
   },
   "devDependencies": {
