@@ -1,7 +1,7 @@
 {
   "name": "tubedesk-for-windows",
   "private": true,
-  "version": "0.5.4",
+  "version": "0.5.5",
   "description": "A focused desktop shell for web video and music workflows on Windows.",
   "main": "main.js",
   "author": "Mattias Vinberg",
@@ -64,7 +64,7 @@
       "displayName": "TubeDesk",
       "publisher": "CN=0A041C83-6229-4D05-83CD-8D8BF7D93CB5",
       "publisherDisplayName": "Placeholder_5909898657",
-      "identityName": "Placeholder5909898657.TubeDesk",
+      "identityName": "youtube-desktop.TubeDesk",
       "languages": [
         "en-US"
       ],
