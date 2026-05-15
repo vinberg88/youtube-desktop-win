@@ -1,7 +1,7 @@
 {
   "name": "tubedesk-for-windows",
   "private": true,
-  "version": "0.5.2",
+  "version": "0.5.3",
   "description": "A focused desktop shell for web video and music workflows on Windows.",
   "main": "main.js",
   "author": "Mattias Vinberg",
@@ -53,7 +53,7 @@
       "shortcutName": "TubeDesk",
       "uninstallDisplayName": "TubeDesk",
       "artifactName": "TubeDesk-Setup-${version}.${ext}",
-      "include": "build/installer.nsh"
+      "include": "installer.nsh"
     },
     "msi": {
       "artifactName": "TubeDesk-${version}.${ext}"
