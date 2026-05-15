@@ -1,7 +1,7 @@
 {
   "name": "tubedesk-for-windows",
   "private": true,
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "A focused desktop shell for web video and music workflows on Windows.",
   "main": "main.js",
   "author": "Mattias Vinberg",
@@ -13,7 +13,7 @@
   },
   "scripts": {
     "start": "electron .",
-    "prepare:appx-assets": "powershell -ExecutionPolicy Bypass -File scripts/create-appx-assets.ps1",
+    "prepare:appx-assets": "node scripts/create-appx-assets.js",
     "build": "electron-builder --win nsis --publish never",
     "build:msi": "electron-builder --win msi --publish never",
     "build:store": "npm run prepare:appx-assets && electron-builder --win appx --publish never",
