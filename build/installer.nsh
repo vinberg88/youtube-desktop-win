@@ -3,7 +3,7 @@
 
 !macro WriteTubeDeskArpMetadata ROOT KEY
   WriteRegStr ${ROOT} "${KEY}" "DisplayName" "TubeDesk"
-  WriteRegStr ${ROOT} "${KEY}" "DisplayVersion" "0.4.9"
+  WriteRegStr ${ROOT} "${KEY}" "DisplayVersion" "0.5.3"
   WriteRegStr ${ROOT} "${KEY}" "Publisher" "Mattias Vinberg"
   WriteRegStr ${ROOT} "${KEY}" "InstallLocation" "$INSTDIR"
   WriteRegStr ${ROOT} "${KEY}" "DisplayIcon" "$INSTDIR\TubeDesk.exe"
