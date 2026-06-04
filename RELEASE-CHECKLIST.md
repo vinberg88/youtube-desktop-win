@@ -18,7 +18,7 @@ Use this checklist before creating a Microsoft Store submission or GitHub releas
 | Field | Expected value or rule |
 |---|---|
 | `build.appx.publisher` | Must exactly match Partner Center package identity publisher. |
-| `build.appx.publisherDisplayName` | `Mattias Vinberg` or exact neutral Partner Center publisher display name. |
+| `build.appx.publisherDisplayName` | `Placeholder_5909898657`; must exactly match the publisher display name shown by Partner Center. |
 | `build.appx.displayName` | `TubeDesk` or exact neutral reserved Store product name. |
 | `build.appx.identityName` | Neutral Partner Center identity, for example `MattiasVinberg.TubeDesk`; must not contain a third-party service title. |
 | `build.appx.applicationId` | `TubeDesk`, unless Partner Center requires a different stable value. |

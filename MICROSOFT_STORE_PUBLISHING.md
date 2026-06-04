@@ -6,7 +6,7 @@ This guide explains how to prepare and resubmit TubeDesk for Microsoft Store aft
 
 TubeDesk should be submitted as an independent Windows desktop workspace for user-selected web video, audio, learning, and live-content workflows. It should not be presented as an official app, replacement client, or single-service container for any third-party service.
 
-The Store listing, screenshots, privacy policy, package metadata, and first-run app experience must all communicate the same product identity: **TubeDesk**, published by **Mattias Vinberg**, with distinct workflow value around local shortcuts, mini-player mode, focus mode, tray behavior, local session controls, mute and zoom controls, and external-browser handoff.
+The Store listing, screenshots, privacy policy, package metadata, and first-run app experience must all communicate the same product identity: **TubeDesk**, published under the Partner Center publisher display name **Placeholder_5909898657**, with distinct workflow value around local shortcuts, mini-player mode, focus mode, tray behavior, local session controls, mute and zoom controls, and external-browser handoff.
 
 ## Important Microsoft Store Policy 10.1 points
 
@@ -21,7 +21,7 @@ Before building the Store package, verify the exact identity fields in Partner C
 | Field | Recommended value or rule |
 |---|---|
 | Product name | `TubeDesk` or another neutral name that does not contain another product or service title. |
-| Publisher display name | `Mattias Vinberg`, or the exact neutral publisher name configured in Partner Center. |
+| Publisher display name | `Placeholder_5909898657`, exactly as shown by Partner Center for this developer account. |
 | Package identity name | Use a neutral Partner Center identity such as `MattiasVinberg.TubeDesk`. Avoid identities containing third-party service names. |
 | Publisher | Use the exact publisher certificate string shown in Partner Center. |
 | Package language | `en-US`, unless you add complete localized Store listings and app UI. |
@@ -38,7 +38,7 @@ The current repository uses the following neutral values, but you must replace `
   "backgroundColor": "#0f0f0f",
   "displayName": "TubeDesk",
   "publisher": "CN=0A041C83-6229-4D05-83CD-8D8BF7D93CB5",
-  "publisherDisplayName": "Mattias Vinberg",
+  "publisherDisplayName": "Placeholder_5909898657",
   "identityName": "MattiasVinberg.TubeDesk",
   "languages": ["en-US"],
   "artifactName": "TubeDesk-Store-${version}.${ext}"
@@ -61,6 +61,16 @@ GitHub → Actions → Build Windows Packages → Run workflow
 ```
 
 Download the artifact named `TubeDesk-Windows-Store-Package`, unzip it, and upload the generated `.appx` or `.msix` package in Partner Center.
+
+## Partner Center blocking error: `PublisherDisplayName`
+
+If Partner Center reports that the app manifest uses the wrong `PublisherDisplayName`, set `build.appx.publisherDisplayName` in `package.json` to the exact value shown in the validation message. For the current developer account, Partner Center expects:
+
+```json
+"publisherDisplayName": "Placeholder_5909898657"
+```
+
+After changing this value, rebuild the Store package and upload the newly generated `.appx` package. Do not re-upload an older artifact, because the old manifest will still contain the rejected value.
 
 ## Partner Center warning: `runFullTrust`
 
