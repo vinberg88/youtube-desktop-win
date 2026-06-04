@@ -6,7 +6,7 @@ This guide explains how to prepare and resubmit TubeDesk for Microsoft Store aft
 
 TubeDesk should be submitted as an independent Windows desktop workspace for user-selected web video, audio, learning, and live-content workflows. It should not be presented as an official app, replacement client, or single-service container for any third-party service.
 
-The Store listing, screenshots, privacy policy, package metadata, and first-run app experience must all communicate the same product identity: **TubeDesk**, published by **Mattias Vinberg**, with distinct workflow value around local shortcuts, mini-player mode, focus mode, tray behavior, local session controls, mute and zoom controls, and external-browser handoff.
+The Store listing, screenshots, privacy policy, package metadata, and first-run app experience must all communicate the same product identity: **TubeDesk**, published under the Partner Center publisher display name **Placeholder_5909898657**, with distinct workflow value around local shortcuts, mini-player mode, focus mode, tray behavior, local session controls, mute and zoom controls, and external-browser handoff.
 
 ## Important Microsoft Store Policy 10.1 points
 
@@ -21,7 +21,7 @@ Before building the Store package, verify the exact identity fields in Partner C
 | Field | Recommended value or rule |
 |---|---|
 | Product name | `TubeDesk` or another neutral name that does not contain another product or service title. |
-| Publisher display name | `Mattias Vinberg`, or the exact neutral publisher name configured in Partner Center. |
+| Publisher display name | `Placeholder_5909898657`, exactly as shown by Partner Center for this developer account. |
 | Package identity name | Use a neutral Partner Center identity such as `MattiasVinberg.TubeDesk`. Avoid identities containing third-party service names. |
 | Publisher | Use the exact publisher certificate string shown in Partner Center. |
 | Package language | `en-US`, unless you add complete localized Store listings and app UI. |
@@ -38,7 +38,7 @@ The current repository uses the following neutral values, but you must replace `
   "backgroundColor": "#0f0f0f",
   "displayName": "TubeDesk",
   "publisher": "CN=0A041C83-6229-4D05-83CD-8D8BF7D93CB5",
-  "publisherDisplayName": "Mattias Vinberg",
+  "publisherDisplayName": "Placeholder_5909898657",
   "identityName": "MattiasVinberg.TubeDesk",
   "languages": ["en-US"],
   "artifactName": "TubeDesk-Store-${version}.${ext}"
@@ -60,7 +60,29 @@ You can also use GitHub Actions:
 GitHub → Actions → Build Windows Packages → Run workflow
 ```
 
-Download the artifact named `TubeDesk-Windows-Store-Package` and upload the generated `.appx` or `.msix` package in Partner Center.
+Download the artifact named `TubeDesk-Windows-Store-Package`, unzip it, and upload the generated `.appx` or `.msix` package in Partner Center.
+
+## Partner Center blocking error: `PublisherDisplayName`
+
+If Partner Center reports that the app manifest uses the wrong `PublisherDisplayName`, set `build.appx.publisherDisplayName` in `package.json` to the exact value shown in the validation message. For the current developer account, Partner Center expects:
+
+```json
+"publisherDisplayName": "Placeholder_5909898657"
+```
+
+After changing this value, rebuild the Store package and upload the newly generated `.appx` package. Do not re-upload an older artifact, because the old manifest will still contain the rejected value.
+
+## Partner Center warning: `runFullTrust`
+
+Electron AppX packages normally declare the restricted capability `runFullTrust`. Microsoft documents that restricted capabilities require approval for Store submission, and Electron Builder documents that `runFullTrust` is required for most Electron apps and is added by default for AppX packages.
+
+Do **not** remove `runFullTrust` from the TubeDesk AppX package as a normal fix. Removing it can make the packaged Electron desktop app fail schema validation or fail to run correctly. Instead, handle the Partner Center package validation warning by completing the restricted-capability explanation in the submission flow.
+
+Use this explanation if Partner Center asks why `runFullTrust` is needed:
+
+> TubeDesk is a packaged Electron desktop application submitted as an AppX/MSIX package. The `runFullTrust` capability is required so the packaged desktop application can start and run its Electron main process as a standard full-trust Windows desktop app. TubeDesk uses this capability only for its local desktop shell features, including the application window, tray behavior, mini-player window, local session controls, and user-initiated navigation. TubeDesk does not use this capability to bypass Windows security, access user files without consent, install services, run background tasks outside the app session, or circumvent third-party websites or services.
+
+If Partner Center shows this as a **warning**, continue the submission after providing the explanation. If Partner Center shows it as a **blocking error** stating that the account is not authorized to submit `runFullTrust`, use Partner Center support or submit TubeDesk through the Store's Win32 desktop app flow instead of the AppX flow.
 
 ## Store listing checklist
 

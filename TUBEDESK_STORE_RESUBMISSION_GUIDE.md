@@ -32,7 +32,7 @@ Appens huvudfiler har ändrats för att göra TubeDesk till den tydliga primära
 | `index.html` | Ny TubeDesk-startsida som förklarar appens oberoende värde och tredjepartsdisclaimer. |
 | `renderer.js` | Generisk URL/search-navigation, lokala användargenvägar, mute/zoom/focus/mini-player-logik och TubeDesk-startkommando. |
 | `mini.html` | Generisk TubeDesk Mini Player utan tjänstespecifika standardknappar. |
-| `package.json` | Neutral produktbeskrivning, `displayName: TubeDesk`, `applicationId: TubeDesk`, `publisherDisplayName: Mattias Vinberg` och neutral `identityName`. |
+| `package.json` | Neutral produktbeskrivning, `displayName: TubeDesk`, `applicationId: TubeDesk`, `publisherDisplayName: Placeholder_5909898657` och neutral `identityName`. |
 
 ## Ändringar i Store- och publiceringsmaterial
 
@@ -66,10 +66,16 @@ Jag har kört syntaxkontroll på Electron-huvudprocessen och preload-filen, inst
 | Fält | Nuvarande värde i repo | Vad du måste kontrollera |
 |---|---|---|
 | `publisher` | `CN=0A041C83-6229-4D05-83CD-8D8BF7D93CB5` | Måste matcha Partner Center exakt. |
-| `publisherDisplayName` | `Mattias Vinberg` | Måste matcha din Publisher Display Name, eller ett neutralt namn som Partner Center accepterar. |
+| `publisherDisplayName` | `Placeholder_5909898657` | Måste matcha Partner Centers Publisher Display Name exakt; detta var orsaken till det blockerande uppladdningsfelet. |
 | `displayName` | `TubeDesk` | Bör matcha reserverat appnamn. |
 | `identityName` | `MattiasVinberg.TubeDesk` | Måste matcha Partner Centers Package/Identity Name exakt. |
 | `languages` | `en-US` | Behåll engelska om du inte lokaliserar app, screenshots och Store-listning fullt ut. |
+
+## Aktuellt uppladdningsfel: PublisherDisplayName
+
+Partner Center rapporterade att paketet innehöll `PublisherDisplayName` = `Mattias Vinberg`, men att kontots Publisher Display Name är `Placeholder_5909898657`. Detta är ett blockerande manifestfel. Lösningen är att bygga ett nytt paket efter att `package.json` har uppdaterats till exakt `Placeholder_5909898657`; det gamla `.appx`-paketet ska inte laddas upp igen.
+
+`runFullTrust`-meddelandet är däremot en separat restricted capability-varning för Electron/AppX och ska motiveras i Partner Center, inte lösas genom att ta bort capabilityn.
 
 ## Rekommenderade steg i Partner Center
 
@@ -107,7 +113,7 @@ För att undvika ett nytt 10.1.1.4-avslag bör screenshots visa TubeDesk som huv
 
 ## Nästa praktiska beslut
 
-Jag har inte pushat ändringarna till GitHub automatiskt. Nästa steg är att du antingen ber mig committa och pusha ändringarna till en ny branch, eller att du laddar ner patchen och applicerar den själv. För Microsoft Store-paketet behöver själva `appx`/`msix`-bygget göras på Windows eller via GitHub Actions, eftersom AppX-paketering inte kan valideras fullt ut i denna Linux-sandbox.
+Ändringarna finns på branchen `store-10-1-fix`. Efter varje metadataändring behöver ett nytt Store-paket byggas via GitHub Actions eller på Windows. Ladda inte upp ett äldre `.appx`-paket, eftersom manifestet i det paketet fortfarande innehåller gamla värden.
 
 ## Referenser
 
