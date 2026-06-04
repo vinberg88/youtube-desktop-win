@@ -9,8 +9,8 @@
   WriteRegStr ${ROOT} "${KEY}" "DisplayIcon" "$INSTDIR\TubeDesk.exe"
   WriteRegStr ${ROOT} "${KEY}" "UninstallString" '"$INSTDIR\Uninstall TubeDesk.exe"'
   WriteRegStr ${ROOT} "${KEY}" "QuietUninstallString" '"$INSTDIR\Uninstall TubeDesk.exe" /S'
-  WriteRegStr ${ROOT} "${KEY}" "URLInfoAbout" "https://github.com/vinberg88/youtube-desktop-win"
-  WriteRegStr ${ROOT} "${KEY}" "HelpLink" "https://github.com/vinberg88/youtube-desktop-win/issues"
+  WriteRegStr ${ROOT} "${KEY}" "URLInfoAbout" "https://github.com/vinberg88"
+  WriteRegStr ${ROOT} "${KEY}" "HelpLink" "https://github.com/vinberg88"
   WriteRegDWORD ${ROOT} "${KEY}" "NoModify" 1
   WriteRegDWORD ${ROOT} "${KEY}" "NoRepair" 1
   WriteRegDWORD ${ROOT} "${KEY}" "EstimatedSize" 300000

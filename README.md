@@ -1,57 +1,34 @@
-# TubeDesk for Windows 
+# TubeDesk for Windows
 
-<img width="300" height="300" alt="TubeDesk-Logo-300" src="https://github.com/user-attachments/assets/37c37c1e-15b6-4412-84a5-af474aea76b5" />
-
-
-> A polished, unofficial Electron-based desktop wrapper for YouTube and YouTube Music on Windows — with persistent login, mini-player, system tray, shortcuts, focus mode, and a custom power-user interface.
-
-![Platform](https://img.shields.io/badge/platform-Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
-![Electron](https://img.shields.io/badge/Electron-Desktop_App-47848F?style=for-the-badge&logo=electron&logoColor=white)
-![Node.js](https://img.shields.io/badge/Node.js-Required-339933?style=for-the-badge&logo=node.js&logoColor=white)
-![License](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)
+TubeDesk is a focused Windows desktop workspace for user-selected web video, audio, learning, and live-content workflows. It provides a dedicated desktop window with local custom shortcuts, mini-player mode, system tray support, keyboard shortcuts, focus mode, always-on-top mode, mute and zoom controls, and a custom power-user interface.
 
 ## Overview
 
-**TubeDesk for Windows** is a lightweight desktop app that opens YouTube and YouTube Music in a dedicated Windows application window. It is designed as a clean, modern, power-user-friendly wrapper — not a downloader, ad blocker, or Premium bypass tool.
+**TubeDesk for Windows** is an independent Electron-based desktop app that lets users open web-based media and live-content pages of their choice in a dedicated Windows application window. It is designed as a clean, modern, power-user-friendly workspace, not as an official client for any third-party service.
 
-The app keeps your YouTube/Google login session using a persistent Electron session partition, so you can sign in once and remain logged in between launches.
+TubeDesk is not a downloader, ad blocker, media extractor, scraping tool, paid-service bypass tool, or DRM circumvention tool. It does not modify, scrape, or circumvent third-party services.
 
-TubeDesk for Windows is unofficial and is not affiliated with, endorsed by, sponsored by, or approved by Google LLC or YouTube.
+TubeDesk is independent and is not affiliated with, endorsed by, sponsored by, or approved by any third-party website, media service, or platform.
 
 ## Features
 
-### Core
-
-- Dedicated YouTube / YouTube Music desktop window
-- Persistent Google/YouTube login session
-- Back, forward, reload, and home controls
-- YouTube URL/search bar
-- Dark custom toolbar
-- Windows installer build support
-- Microsoft Store package build support on Windows
-
-### Power-user extras
-
-- Custom start page
-- Quick links for Home, Subscriptions, YouTube Music, Trending, History, and Watch Later
-- Mini-player window
-- Always-on-top mode
-- System tray integration when `assets/icon.ico` is present
-- Focus mode
-- Mute toggle
-- Zoom in, zoom out, and reset zoom
-- Progress indicator
-- Toast notifications
-- Open current page in external browser
-- Clear local login/session data
-- Keyboard shortcuts
+| Area | Feature |
+|---|---|
+| Workspace | Dedicated desktop window for user-selected web media and live-content pages. |
+| Shortcuts | Local custom shortcuts saved on the user's own device. |
+| Window control | Mini-player, focus mode, always-on-top mode, tray support, and external-browser handoff. |
+| Page control | Back, forward, reload, URL/search field, mute toggle, and zoom controls. |
+| Privacy control | Clear local workspace session data from the device. |
+| Packaging | Windows installer and Microsoft Store package build support. |
 
 ## Requirements
 
-- Windows 10 or Windows 11 for Windows/AppX/MSIX builds
-- Node.js 22.12+ (required by the pinned Electron toolchain)
-- npm
-- Git, optional but recommended
+| Requirement | Version or note |
+|---|---|
+| Windows | Windows 10 or Windows 11 for Windows/AppX/MSIX builds. |
+| Node.js | Node.js 22.12+ is required by the pinned Electron toolchain. |
+| npm | Required for dependency installation and builds. |
+| Git | Optional but recommended for development. |
 
 Check your versions:
 
@@ -66,8 +43,8 @@ git --version
 Clone the repository:
 
 ```bash
-git clone https://github.com/vinberg88/youtube-desktop-win.git
-cd youtube-desktop-win
+git clone <repository-url>
+cd tubedesk-for-windows
 ```
 
 Install dependencies:
@@ -90,11 +67,7 @@ Create a standard Windows NSIS installer:
 npm run build
 ```
 
-The generated installer will be placed in:
-
-```text
-dist/
-```
+The generated installer will be placed in `dist/`.
 
 ## Build Microsoft Store Package
 
@@ -104,17 +77,9 @@ This repository uses Electron Builder's AppX target:
 npm run build:store
 ```
 
-Important: `appx` packaging must be built on a real Windows environment. It does **not** work from Ubuntu, Linux, or WSL.
+AppX/MSIX packaging must be built on a real Windows environment. It does not work from Ubuntu, Linux, or WSL. Use Windows 10/11 PowerShell, a GitHub Actions `windows-latest` runner, or a Windows VM.
 
-Use one of these instead:
-
-```text
-Windows 10/11 PowerShell
-GitHub Actions windows-latest runner
-Windows VM
-```
-
-Recommended path:
+The recommended build path is:
 
 ```text
 GitHub → Actions → Build Windows Packages → Run workflow
@@ -128,37 +93,28 @@ TubeDesk-Windows-Store-Package
 
 Upload that package in Microsoft Partner Center.
 
-### Store Identity Configuration
+## Store Identity Configuration
 
-Before building for Microsoft Store, make sure the values under `build.appx` in `package.json` match the package identity and publisher registered in Partner Center.
+Before building for Microsoft Store, make sure the values under `build.appx` in `package.json` match the exact package identity and publisher registered in Partner Center.
 
-For this repository, keep Microsoft Store copy and package language metadata in English only (`en-US`). That includes the Partner Center listing, release/submission notes, screenshots with text, and `build.appx.languages`.
+The current repository uses neutral TubeDesk metadata. If the Partner Center product identity still contains a third-party product or service name, create or reserve a new neutral product identity before resubmitting. Store package identity fields must match Partner Center exactly.
+
+Keep Microsoft Store copy and package language metadata in English only (`en-US`). That includes the Partner Center listing, release/submission notes, screenshots with text, and `build.appx.languages`.
 
 For the full release and Store publication workflow, see:
 
 - [`RELEASE-CHECKLIST.md`](RELEASE-CHECKLIST.md)
 - [`MICROSOFT_STORE_PUBLISHING.md`](MICROSOFT_STORE_PUBLISHING.md)
+- [`STORE-LISTING.md`](STORE-LISTING.md)
 
-### Microsoft Store Publishing Guide
+## Store Limitations
 
-A practical, step-by-step guide for preparing and submitting TubeDesk for Windows to Microsoft Store is available here:
-
-https://vinberg88.github.io/tubedesk-store-guide/
-
-This guide documents the Store submission path, package notes, signing lessons, and validation details discovered while preparing TubeDesk.
-
-### Store Limitations
-
-When running as a Store app (`process.windowsStore === true`):
-
-- Global keyboard shortcuts are disabled (OS-level shortcuts are restricted in AppX sandbox)
-- The AppUserModelId is managed by Windows automatically
-- All other features (tray, notifications, webview, mini-player) work normally
+When running as a Store app (`process.windowsStore === true`), global keyboard shortcuts are disabled because OS-level shortcuts are restricted in the AppX sandbox. Other app-level features such as tray behavior, notifications, webview usage, mini-player mode, focus mode, and local shortcuts remain available subject to Windows and website behavior.
 
 ## Project Structure
 
 ```text
-youtube-desktop-win/
+tubedesk-for-windows/
 ├─ .github/workflows/build-windows.yml
 ├─ assets/
 │  ├─ icon.svg
@@ -178,49 +134,30 @@ youtube-desktop-win/
 └─ .gitignore
 ```
 
-For full tray icon and installer icon support, add a Windows icon at:
-
-```text
-assets/icon.ico
-```
-
 ## Keyboard Shortcuts
 
 | Shortcut | Action |
 |---|---|
-| `Ctrl + L` | Focus search/URL field |
-| `Ctrl + R` | Reload YouTube |
-| `Ctrl + H` | Go to YouTube Home |
-| `Ctrl + M` | Toggle mute |
-| `Ctrl + Shift + F` | Toggle focus mode |
-| `Ctrl + Shift + Y` | Show/hide app globally |
-| `Alt + Left` | Go back |
-| `Alt + Right` | Go forward |
+| `Ctrl + L` | Focus search/URL field. |
+| `Ctrl + R` | Reload current page. |
+| `Ctrl + H` | Show TubeDesk Start. |
+| `Ctrl + M` | Toggle mute. |
+| `Ctrl + Shift + F` | Toggle focus mode. |
+| `Ctrl + Shift + Y` | Show/hide app globally outside Store sandbox. |
+| `Alt + Left` | Go back. |
+| `Alt + Right` | Go forward. |
 
-## Login Behavior
+## Privacy and Login Behavior
 
-The app uses a persistent Electron session partition:
+The app uses a persistent Electron session partition named `persist:tubedesk`. This allows cookies and session data created by user-selected websites to remain available after restarting the app.
 
-```html
-partition="persist:youtube"
-```
-
-This allows YouTube/Google cookies and session data to remain available after restarting the app.
-
-Note: Google may occasionally restrict sign-in in embedded browser environments. This project does not attempt to bypass Google security mechanisms.
+If a user signs in to a third-party website inside TubeDesk, login is handled directly by that website. TubeDesk does not receive, store, or process usernames, passwords, authentication tokens, or payment information.
 
 ## What This App Does Not Do
 
-This project intentionally does **not** include:
+TubeDesk intentionally does not include video downloading, ad blocking, paid-service bypassing, DRM circumvention, API scraping, or any feature designed to violate third-party service terms.
 
-- Video downloading
-- Ad blocking
-- Premium bypassing
-- DRM circumvention
-- YouTube API scraping
-- Any feature designed to violate YouTube or Google terms
-
-The goal is simple: a clean desktop experience for YouTube and YouTube Music on Windows.
+The goal is a clean, dedicated desktop workspace for user-selected web media and live-content workflows on Windows.
 
 ## Development Notes
 
@@ -260,25 +197,17 @@ npm run build
 
 ## Roadmap
 
-- [ ] Custom app theme selector
-- [ ] More quick links
-- [ ] Configurable start page
-- [ ] Better mini-player controls
-- [ ] Import/export app settings
-- [ ] Auto-update support
-- [ ] Screenshot assets for README
-- [x] GitHub Actions build pipeline
-- [x] Microsoft Store listing draft
-- [x] Privacy policy
+| Status | Item |
+|---|---|
+| Planned | Custom app theme selector. |
+| Planned | Import/export app settings. |
+| Planned | More configurable workspace templates. |
+| Planned | Better mini-player controls. |
+| Planned | Auto-update support outside Microsoft Store distribution. |
+| Complete | GitHub Actions build pipeline. |
+| Complete | Microsoft Store listing draft. |
+| Complete | Privacy policy. |
 
 ## License
 
 MIT License. See [`LICENSE`](LICENSE).
-
-
-<img width="1245" height="762" alt="musik" src="https://github.com/user-attachments/assets/cff2ed15-78ba-4d58-bd53-1f920e893636" />
-
-<img width="1280" height="800" alt="front" src="https://github.com/user-attachments/assets/b1c96c35-08d7-4cc5-8a59-fa0b280b59c8" />
-
-
-

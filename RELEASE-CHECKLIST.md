@@ -1,62 +1,60 @@
-# TubeDesk for Windows — Release Checklist
+# TubeDesk Release Checklist
 
-## Before every release
+Use this checklist before creating a Microsoft Store submission or GitHub release.
 
-- [ ] Confirm the release version in `package.json` and any release notes/draft text.
-- [ ] Verify `package-lock.json` is committed and matches the pinned Electron/electron-builder versions.
-- [ ] Run `npm ci`.
+## Code and metadata
 
-## Windows builds (via GitHub Actions)
+| Check | Requirement |
+|---|---|
+| App first run | TubeDesk Start appears first; no third-party service opens by default. |
+| UI language | Visible Store-facing UI text is English unless complete localization is added. |
+| App identity | Product name and package metadata use neutral TubeDesk branding. |
+| Third-party references | Third-party product names are not used as product identity, keywords, screenshot titles, or default app content. |
+| Privacy policy | `PRIVACY.md` describes user-selected websites and local session behavior accurately. |
+| Store listing | `STORE-LISTING.md` matches the shipped app behavior and screenshots. |
 
-- [ ] Trigger **Build Windows Packages** workflow on `main` branch.
-- [ ] Confirm `TubeDesk-Windows-NSIS` artifact generated (`dist/*.exe`).
-- [ ] Confirm `TubeDesk-Windows-MSI` artifact generated (`dist/*.msi`).
-- [ ] Confirm `TubeDesk-Windows-Store-Package` artifact generated (`dist/*.appx`).
+## Store metadata
 
-## Installer metadata check
+| Field | Expected value or rule |
+|---|---|
+| `build.appx.publisher` | Must exactly match Partner Center package identity publisher. |
+| `build.appx.publisherDisplayName` | `Mattias Vinberg` or exact neutral Partner Center publisher display name. |
+| `build.appx.displayName` | `TubeDesk` or exact neutral reserved Store product name. |
+| `build.appx.identityName` | Neutral Partner Center identity, for example `MattiasVinberg.TubeDesk`; must not contain a third-party service title. |
+| `build.appx.applicationId` | `TubeDesk`, unless Partner Center requires a different stable value. |
+| `build.appx.languages` | `['en-US']` unless complete localization is added. |
 
-- [ ] App name, publisher, version, icon, uninstall entry, and install/uninstall flow are correct.
+If Partner Center has a locked product identity that contains a third-party product or service name, reserve a new neutral app/product identity before resubmission.
 
-## Store package metadata check
+## Build checks
 
-- [ ] `build.appx.publisher` is `CN=0A041C83-6229-4D05-83CD-8D8BF7D93CB5` (confirmed Partner Center value).
-- [ ] `build.appx.publisherDisplayName` is `youtube-desktop`.
-- [ ] `build.appx.displayName` is `TubeDesk for Windows`.
-- [ ] `build.appx.identityName` is `youtube-desktop.TubeDeskForWindows`.
-- [ ] `build.appx.languages` is `["en-US"]`.
-- [ ] AppxManifest identity/publisher/display name verified against Partner Center Product identity page.
+```bash
+npm ci
+npm run build
+```
 
-## Assets and listing
+For Microsoft Store packaging, build on Windows or GitHub Actions:
 
-- [ ] `assets/icon.ico` is present and current.
-- [ ] Store screenshots prepared (English only, 1366×768 or larger).
-- [ ] Privacy policy URL is public and reachable.
-- [ ] Store listing copy is English only (`STORE-LISTING.md`).
+```powershell
+npm ci
+npm run build:store
+```
 
-## Smoke test
+## Pre-submission validation
 
-- [ ] Packaged app launches correctly.
-- [ ] Sign-in persistence works.
-- [ ] Tray/menu behavior is correct.
-- [ ] Mini-player opens.
-- [ ] Notifications work.
-- [ ] External-link handling is correct.
+| Check | Action |
+|---|---|
+| Brand scan | Run `grep -RIn --exclude-dir=.git --exclude=package-lock.json -E "YouTube|youtube|Google|google" .` and review any remaining references. |
+| Manifest scan | Inspect generated `AppxManifest.xml` and verify identity, publisher, display name, logos, and language. |
+| Screenshot review | Confirm screenshots show TubeDesk value and do not make a third-party website the dominant product identity. |
+| Certification notes | Include the resubmission explanation from `MICROSOFT_STORE_PUBLISHING.md`. |
+| Privacy URL | Ensure hosted privacy policy is public and reachable. |
 
-## Partner Center submission
+## GitHub release checks
 
-> **Important:** The app must be registered as an **MSIX app** (not Win32/EXE) in Partner Center.
-> See `MICROSOFT_STORE_PUBLISHING.md` Step 1 for instructions on deleting the old Win32 entry and creating a new MSIX app.
-
-- [ ] Partner Center app is of type **MSIX or PWA app** (not EXE or MSI app).
-- [ ] New submission created in Partner Center.
-- [ ] `.appx` package uploaded to the Packages section.
-- [ ] All submission sections completed (availability, properties, age ratings, store listing).
-- [ ] No validation errors before submitting.
-- [ ] Submitted to the Store.
-
-## GitHub release
-
-- [ ] GitHub release created with tag matching `package.json` version (e.g. `v0.4.7`).
-- [ ] NSIS installer attached to release.
-- [ ] MSI installer attached to release.
-- [ ] Release notes written.
+| Check | Requirement |
+|---|---|
+| Version | `package.json` version matches release tag. |
+| Installer metadata | NSIS installer metadata uses current version and neutral publisher name. |
+| Artifacts | NSIS, MSI, and Store artifacts are generated successfully as needed. |
+| Release notes | Notes describe TubeDesk features and any Store-compliance changes accurately. |
