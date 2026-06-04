@@ -11,26 +11,12 @@ const isWindowsStore = process.windowsStore || false;
 const appDisplayName = "TubeDesk";
 const iconPath = path.join(__dirname, "assets", "icon.ico");
 const windowIcon = fs.existsSync(iconPath) ? iconPath : undefined;
-const youtubePartition = "persist:youtube";
-
-const allowedHosts = new Set([
-  "youtube.com",
-  "www.youtube.com",
-  "m.youtube.com",
-  "music.youtube.com",
-  "accounts.google.com",
-  "accounts.youtube.com",
-  "myaccount.google.com",
-  "www.google.com",
-  "policies.google.com",
-  "support.google.com",
-  "play.google.com"
-]);
+const appPartition = "persist:tubedesk";
 
 function isAllowedUrl(url) {
   try {
     const parsed = new URL(url);
-    return ["https:", "http:"].includes(parsed.protocol) && allowedHosts.has(parsed.hostname);
+    return ["https:", "http:"].includes(parsed.protocol);
   } catch {
     return false;
   }
@@ -81,7 +67,7 @@ function createWindow() {
     if (!app.isQuitting) {
       event.preventDefault();
       mainWindow.hide();
-      showNotification(`${appDisplayName} kör i system tray`, "Dubbelklicka på ikonen för att öppna igen.");
+      showNotification(`${appDisplayName} is running in the system tray`, "Double-click the icon to reopen the workspace.");
     }
   });
 
@@ -100,22 +86,14 @@ function createTray() {
 
   const contextMenu = Menu.buildFromTemplate([
     {
-      label: "Visa app",
+      label: "Show TubeDesk",
       click: () => {
         if (mainWindow) mainWindow.show();
       }
     },
     {
-      label: "Hem",
-      click: () => sendToRenderer("app-command", "home")
-    },
-    {
-      label: "Prenumerationer",
-      click: () => sendToRenderer("app-command", "subscriptions")
-    },
-    {
-      label: "YouTube Music",
-      click: () => sendToRenderer("app-command", "music")
+      label: "Show start workspace",
+      click: () => sendToRenderer("app-command", "start")
     },
     { type: "separator" },
     {
@@ -128,7 +106,7 @@ function createTray() {
       }
     },
     {
-      label: "Fokusläge",
+      label: "Focus mode",
       type: "checkbox",
       click: (menuItem) => {
         focusMode = menuItem.checked;
@@ -136,14 +114,14 @@ function createTray() {
       }
     },
     {
-      label: "Rensa login/session",
+      label: "Clear local workspace session",
       click: async () => {
-        await clearYoutubeSession();
+        await clearWorkspaceSession();
       }
     },
     { type: "separator" },
     {
-      label: "Avsluta",
+      label: "Quit",
       click: () => {
         app.isQuitting = true;
         app.quit();
@@ -168,7 +146,7 @@ function registerShortcuts() {
       else mainWindow.show();
     });
   } catch {
-    // Global shortcuts may fail in sandboxed Store environment
+    // Global shortcuts may fail in sandboxed Store environments.
   }
 }
 
@@ -178,11 +156,11 @@ function showNotification(title, body) {
   }
 }
 
-async function clearYoutubeSession() {
-  const youtubeSession = session.fromPartition(youtubePartition);
-  await youtubeSession.clearStorageData();
+async function clearWorkspaceSession() {
+  const workspaceSession = session.fromPartition(appPartition);
+  await workspaceSession.clearStorageData();
   if (mainWindow) mainWindow.reload();
-  showNotification("Session rensad", "YouTube/Google-login är borttaget från appen.");
+  showNotification("Local session cleared", "TubeDesk local workspace browsing data has been removed from this device.");
   return true;
 }
 
@@ -199,7 +177,7 @@ ipcMain.handle("set-focus-mode", (_event, enabled) => {
 });
 
 ipcMain.handle("open-mini-player", (_event, url) => {
-  const safeUrl = isAllowedUrl(url) ? url : "https://www.youtube.com";
+  const safeUrl = isAllowedUrl(url) ? url : "about:blank";
 
   const mini = new BrowserWindow({
     width: 480,
@@ -224,7 +202,7 @@ ipcMain.handle("open-mini-player", (_event, url) => {
   return true;
 });
 
-ipcMain.handle("clear-youtube-session", clearYoutubeSession);
+ipcMain.handle("clear-workspace-session", clearWorkspaceSession);
 
 ipcMain.handle("open-external", (_event, url) => {
   if (isAllowedUrl(url)) {
@@ -242,7 +220,7 @@ ipcMain.handle("show-notification", (_event, title, body) => {
 ipcMain.handle("get-app-info", () => ({
   name: appDisplayName,
   version: app.getVersion(),
-  partition: youtubePartition,
+  partition: appPartition,
   isWindowsStore
 }));
 

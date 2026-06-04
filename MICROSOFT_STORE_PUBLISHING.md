@@ -1,145 +1,97 @@
-# Microsoft Store Publishing Guide — TubeDesk for Windows
+# Microsoft Store Publishing Guide for TubeDesk
 
-This guide is tailored to the current `main` setup in this repository.
+This guide explains how to prepare and resubmit TubeDesk for Microsoft Store after a Policy 10.1 rejection related to inaccurate representation.
 
-| Setting | Value |
+## Current Store compliance position
+
+TubeDesk should be submitted as an independent Windows desktop workspace for user-selected web video, audio, learning, and live-content workflows. It should not be presented as an official app, replacement client, or single-service container for any third-party service.
+
+The Store listing, screenshots, privacy policy, package metadata, and first-run app experience must all communicate the same product identity: **TubeDesk**, published by **Mattias Vinberg**, with distinct workflow value around local shortcuts, mini-player mode, focus mode, tray behavior, local session controls, mute and zoom controls, and external-browser handoff.
+
+## Important Microsoft Store Policy 10.1 points
+
+Microsoft Store Policy 10.1 requires the product and metadata to accurately and clearly reflect the product's source, functionality, features, and relationship to other products. Policy 10.1.1 also requires that the value proposition be clear during the first-run experience and that the product must not mislead customers about its relationship to other products.
+
+For TubeDesk, this means the first screen should be the TubeDesk-branded start workspace, not a third-party website. Screenshots and text should show TubeDesk features, and third-party service names should not be used as keywords or as the product's identity.
+
+## Partner Center identity checklist
+
+Before building the Store package, verify the exact identity fields in Partner Center and mirror them in `package.json` under `build.appx`.
+
+| Field | Recommended value or rule |
 |---|---|
-| Store build command | `npm run build:store` (`electron-builder --win appx`) |
-| Store artifact in CI | `TubeDesk-Windows-Store-Package` |
-| Config file | `package.json` → `build.appx` |
-| Listing/privacy docs | `STORE-LISTING.md`, `PRIVACY.md` |
+| Product name | `TubeDesk` or another neutral name that does not contain another product or service title. |
+| Publisher display name | `Mattias Vinberg`, or the exact neutral publisher name configured in Partner Center. |
+| Package identity name | Use a neutral Partner Center identity such as `MattiasVinberg.TubeDesk`. Avoid identities containing third-party service names. |
+| Publisher | Use the exact publisher certificate string shown in Partner Center. |
+| Package language | `en-US`, unless you add complete localized Store listings and app UI. |
 
----
+If the existing Partner Center product has a locked identity that contains a third-party product or service name, reserve a new neutral app/product identity and submit a new Store product. Package identity mismatches will fail ingestion, so update `package.json` only to values that Partner Center confirms.
 
-## Confirmed Partner Center Account Identity
+## package.json example
 
-All values below have been confirmed from the Partner Center account settings.
+The current repository uses the following neutral values, but you must replace `publisher` and `identityName` if Partner Center shows different exact values:
 
-| Field | Value |
-|---|---|
-| Publisher Display Name | `youtube-desktop` |
-| Account type | Individual |
-| Account status | Active |
-| Seller ID | `94606110` |
-| Windows Publisher ID | `youtube-desktop` |
-| Windows Phone Publisher ID | `f6d3ec94-333b-410b-8549-456a21f3fda4` |
-| Package Identity Publisher (`CN=...`) | `CN=0A041C83-6229-4D05-83CD-8D8BF7D93CB5` |
+```json
+"appx": {
+  "applicationId": "TubeDesk",
+  "backgroundColor": "#0f0f0f",
+  "displayName": "TubeDesk",
+  "publisher": "CN=0A041C83-6229-4D05-83CD-8D8BF7D93CB5",
+  "publisherDisplayName": "Mattias Vinberg",
+  "identityName": "MattiasVinberg.TubeDesk",
+  "languages": ["en-US"],
+  "artifactName": "TubeDesk-Store-${version}.${ext}"
+}
+```
 
-The `package.json` `build.appx` section is already fully configured with these values — no changes are required before building.
+## Build package
 
----
-
-## Step 1 — Delete the existing Win32 app and create a new MSIX app
-
-The Partner Center account currently has an app registered as **EXE or MSI app** (Win32). This type cannot accept an APPX/MSIX package. To publish TubeDesk as a proper Store app, the existing entry must be replaced.
-
-1. Go to [Partner Center → Apps and games](https://partner.microsoft.com/en-us/dashboard/apps-and-games/overview).
-2. Open the existing `youtube-desktop` entry.
-3. Go to **Product management → Manage app name** and delete the app name reservation, or use the **Delete draft** link at the top of the app overview.
-4. Click **New product** and choose **MSIX or PWA app**.
-5. Reserve the app name `TubeDesk for Windows`.
-6. After creation, go to **Product management → Product identity** and confirm that the **Package/Identity/Publisher** value shown is `CN=0A041C83-6229-4D05-83CD-8D8BF7D93CB5`. If it differs, update `build.appx.publisher` in `package.json` accordingly.
-
----
-
-## Step 2 — Verify `package.json` identity alignment
-
-Open `package.json` and confirm the following values under `build.appx`:
-
-| Field | Current value | Expected |
-|---|---|---|
-| `publisher` | `CN=0A041C83-6229-4D05-83CD-8D8BF7D93CB5` | Must match Partner Center Product identity |
-| `publisherDisplayName` | `youtube-desktop` | Must match Partner Center publisher display name |
-| `displayName` | `TubeDesk for Windows` | Must match reserved app name |
-| `identityName` | `youtube-desktop.TubeDeskForWindows` | Keep stable once published |
-| `applicationId` | `TubeDeskForWindows` | Keep stable once published |
-| `languages` | `["en-US"]` | English-only |
-
-All fields are currently correct. If the Product identity page in Partner Center shows a different `CN=...` value after creating the new MSIX app, update `build.appx.publisher` before building.
-
----
-
-## Step 3 — Build the Store package
-
-APPX packaging must run on Windows. Use GitHub Actions (recommended) or a local Windows machine.
-
-### Option A — GitHub Actions (recommended)
-
-1. Push your changes to `main`.
-2. In GitHub, open **Actions → Build Windows Packages**.
-3. Click **Run workflow** and select the `main` branch.
-4. Wait for the `build-store` job to complete.
-5. Download the artifact named **TubeDesk-Windows-Store-Package** — it contains the `.appx` file.
-
-### Option B — Local Windows machine
+Build the Store package on Windows, not Linux or WSL:
 
 ```powershell
 npm ci
 npm run build:store
 ```
 
-The output file will be placed in `dist/` with a name matching `TubeDesk-for-Windows-Store-*.appx`.
+You can also use GitHub Actions:
 
----
-
-## Step 4 — Verify the package manifest before upload
-
-On Windows PowerShell, run the following to inspect the generated package:
-
-```powershell
-Remove-Item -Recurse -Force .\dist\appx-unpacked -ErrorAction SilentlyContinue
-Expand-Archive -Path .\dist\*.appx -DestinationPath .\dist\appx-unpacked -Force
-Get-Content .\dist\appx-unpacked\AppxManifest.xml | Select-String "Identity|Publisher|DisplayName"
+```text
+GitHub → Actions → Build Windows Packages → Run workflow
 ```
 
-Confirm that the manifest values match the Partner Center Product identity page exactly.
+Download the artifact named `TubeDesk-Windows-Store-Package` and upload the generated `.appx` or `.msix` package in Partner Center.
 
----
+## Store listing checklist
 
-## Step 5 — Prepare Store submission assets
+Use the copy in `STORE-LISTING.md` and keep the listing in English unless you provide complete localized variants.
 
-Before submitting, gather the following materials. All text must be in English only.
-
-| Asset | Source |
+| Store item | Requirement |
 |---|---|
-| App name | `TubeDesk for Windows` |
-| Short description | See `STORE-LISTING.md` |
-| Long description | See `STORE-LISTING.md` |
-| Privacy policy URL | Host `PRIVACY.md` at a public URL (e.g. GitHub Pages or raw GitHub) |
-| Screenshots | Minimum 1 screenshot at 1366×768 or larger; all visible text must be English |
-| Store logo | 300×300 PNG |
-| Category | Entertainment or Music |
+| App name | Use `TubeDesk`; do not add third-party product names or keyword phrases. |
+| Short description | State that it is a focused Windows workspace for user-selected web media workflows. |
+| Long description | Explain desktop workflow features and third-party-service limitations clearly. |
+| Keywords | Use at most seven relevant generic terms; do not use third-party product titles. |
+| Screenshots | Show TubeDesk branding, start workspace, shortcuts, mini-player, focus mode, and tray menu. |
+| Privacy policy | Use the updated `PRIVACY.md` text or a hosted equivalent. |
+| Certification notes | Explain exactly what changed after the 10.1 rejection. |
 
----
+## Recommended certification notes
 
-## Step 6 — Create and complete the submission
+Use a concise note similar to this in Partner Center:
 
-1. Open the new MSIX app in Partner Center.
-2. Go to **Submissions → Create new submission**.
-3. In **Packages**, upload the `.appx` file from Step 3.
-4. Complete all remaining sections: Store listings, pricing/availability, properties, age ratings.
-5. Resolve all validation warnings and errors.
-6. Click **Submit to the Store**.
+> This resubmission updates TubeDesk to address Microsoft Store Policy 10.1 / 10.1.1.4 feedback. The app is now represented and implemented as an independent Windows workspace for user-selected web media, audio, learning, and live-content workflows. The first-run experience opens a TubeDesk-branded start workspace instead of a third-party service. Metadata, privacy policy, Store description, keywords, and screenshots avoid using third-party product names as the app identity or search terms. TubeDesk provides distinct desktop workflow features including local custom shortcuts, mini-player mode, focus mode, always-on-top mode, tray behavior, local session controls, mute/zoom controls, and external-browser handoff. TubeDesk is not affiliated with, endorsed by, sponsored by, or approved by any third-party website or media service and does not download, scrape, bypass, or circumvent third-party services.
 
----
+## Screenshot guidance
 
-## Step 7 — Certification and publication
+The first screenshot should be the TubeDesk start page because this proves that the value proposition is clear during first run. Subsequent screenshots should show user-created shortcuts, the mini-player, focus mode, and the system tray menu. If a third-party website appears in a screenshot, keep TubeDesk UI chrome visible and do not make the third-party brand the dominant visual identity.
 
-After submission, Microsoft runs automated and manual certification checks. Track the status in Partner Center. If certification fails, open the failure report, fix the reported issue, rebuild the package, and create a new submission. When certification passes, the app is published according to your availability settings.
+## Final pre-submission checks
 
----
+Run a search through the repository and listing copy before submission. Third-party names should appear only in neutral disclaimers or technical compatibility notes when absolutely necessary, not in product name, package identity, keywords, screenshot titles, or first-run app identity.
 
-## Pre-submission checklist
+```bash
+grep -RIn --exclude-dir=.git --exclude=package-lock.json -E "YouTube|youtube|Google|google" .
+```
 
-- [ ] Existing Win32 app deleted from Partner Center
-- [ ] New MSIX app created with name `TubeDesk for Windows`
-- [ ] `build.appx.publisher` in `package.json` matches the new app's Product identity `CN=...`
-- [ ] `build.appx.publisherDisplayName` is `youtube-desktop`
-- [ ] `build.appx.languages` is `["en-US"]`
-- [ ] GitHub Actions `build-store` job passes
-- [ ] AppxManifest identity/publisher/display name verified against Partner Center
-- [ ] Privacy policy URL is public and reachable
-- [ ] Store screenshots prepared (English only)
-- [ ] Store listing text reviewed (`STORE-LISTING.md`)
-- [ ] All Partner Center submission sections completed
-- [ ] No validation errors before submitting
+Any remaining references should be reviewed and either removed or justified as neutral legal/privacy wording.
