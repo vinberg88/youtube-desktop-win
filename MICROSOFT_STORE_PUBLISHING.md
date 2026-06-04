@@ -22,7 +22,7 @@ Before building the Store package, verify the exact identity fields in Partner C
 |---|---|
 | Product name | `TubeDesk` or another neutral name that does not contain another product or service title. |
 | Publisher display name | `Placeholder_5909898657`, exactly as shown by Partner Center for this developer account. |
-| Package identity name | Use a neutral Partner Center identity such as `MattiasVinberg.TubeDesk`. Avoid identities containing third-party service names. |
+| Package identity name | Use the exact Partner Center package identity name reserved for this Store listing: `youtube-desktop.TubeDesk`. Do not use another neutral-looking value, because Partner Center validates this field exactly. |
 | Publisher | Use the exact publisher certificate string shown in Partner Center. |
 | Package language | `en-US`, unless you add complete localized Store listings and app UI. |
 
@@ -30,7 +30,7 @@ If the existing Partner Center product has a locked identity that contains a thi
 
 ## package.json example
 
-The current repository uses the following neutral values, but you must replace `publisher` and `identityName` if Partner Center shows different exact values:
+The current repository uses the following Partner Center values. These must match the exact values shown by Partner Center:
 
 ```json
 "appx": {
@@ -39,7 +39,7 @@ The current repository uses the following neutral values, but you must replace `
   "displayName": "TubeDesk",
   "publisher": "CN=0A041C83-6229-4D05-83CD-8D8BF7D93CB5",
   "publisherDisplayName": "Placeholder_5909898657",
-  "identityName": "MattiasVinberg.TubeDesk",
+  "identityName": "youtube-desktop.TubeDesk",
   "languages": ["en-US"],
   "artifactName": "TubeDesk-Store-${version}.${ext}"
 }

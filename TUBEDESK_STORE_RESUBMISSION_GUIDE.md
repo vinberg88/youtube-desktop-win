@@ -32,7 +32,7 @@ Appens huvudfiler har ändrats för att göra TubeDesk till den tydliga primära
 | `index.html` | Ny TubeDesk-startsida som förklarar appens oberoende värde och tredjepartsdisclaimer. |
 | `renderer.js` | Generisk URL/search-navigation, lokala användargenvägar, mute/zoom/focus/mini-player-logik och TubeDesk-startkommando. |
 | `mini.html` | Generisk TubeDesk Mini Player utan tjänstespecifika standardknappar. |
-| `package.json` | Neutral produktbeskrivning, `displayName: TubeDesk`, `applicationId: TubeDesk`, `publisherDisplayName: Placeholder_5909898657` och neutral `identityName`. |
+| `package.json` | Neutral produktbeskrivning, `displayName: TubeDesk`, `applicationId: TubeDesk`, `publisherDisplayName: Placeholder_5909898657`, `identityName: youtube-desktop.TubeDesk` och höjd version för nytt unikt paket. |
 
 ## Ändringar i Store- och publiceringsmaterial
 
@@ -61,19 +61,19 @@ Jag har kört syntaxkontroll på Electron-huvudprocessen och preload-filen, inst
 
 ## Viktigt innan du bygger Store-paketet
 
-`package.json` är nu satt till en neutral identitet, men Microsoft Partner Center kräver att paketets identity-värden matchar Partner Center exakt. Om Partner Center fortfarande har en låst identitet som innehåller ett gammalt tredjepartsnamn bör du reservera en ny neutral appidentitet innan ny inskickning.
+`package.json` är nu satt till Partner Centers exakta identitet för den här Store-produkten. Microsoft Partner Center kräver att paketets identity-värden matchar Partner Center exakt, och versionsnumret måste höjas om ett paket med samma full name redan har laddats upp tidigare.
 
 | Fält | Nuvarande värde i repo | Vad du måste kontrollera |
 |---|---|---|
 | `publisher` | `CN=0A041C83-6229-4D05-83CD-8D8BF7D93CB5` | Måste matcha Partner Center exakt. |
 | `publisherDisplayName` | `Placeholder_5909898657` | Måste matcha Partner Centers Publisher Display Name exakt; detta var orsaken till det blockerande uppladdningsfelet. |
 | `displayName` | `TubeDesk` | Bör matcha reserverat appnamn. |
-| `identityName` | `MattiasVinberg.TubeDesk` | Måste matcha Partner Centers Package/Identity Name exakt. |
+| `identityName` | `youtube-desktop.TubeDesk` | Måste matcha Partner Centers Package/Identity Name exakt; detta var orsaken till identity name / family name-felet. |
 | `languages` | `en-US` | Behåll engelska om du inte lokaliserar app, screenshots och Store-listning fullt ut. |
 
-## Aktuellt uppladdningsfel: PublisherDisplayName
+## Aktuella uppladdningsfel: PublisherDisplayName, identityName och versionskollision
 
-Partner Center rapporterade att paketet innehöll `PublisherDisplayName` = `Mattias Vinberg`, men att kontots Publisher Display Name är `Placeholder_5909898657`. Detta är ett blockerande manifestfel. Lösningen är att bygga ett nytt paket efter att `package.json` har uppdaterats till exakt `Placeholder_5909898657`; det gamla `.appx`-paketet ska inte laddas upp igen.
+Partner Center rapporterade först att paketet innehöll `PublisherDisplayName` = `Mattias Vinberg`, men att kontots Publisher Display Name är `Placeholder_5909898657`. Därefter rapporterade Partner Center att package identity name måste vara exakt `youtube-desktop.TubeDesk`, inte `MattiasVinberg.TubeDesk`. Slutligen rapporterade Partner Center en versionskollision eftersom ett paket med samma full name redan hade laddats upp med annat innehåll. Lösningen är att bygga ett nytt paket efter att `package.json` har uppdaterats till exakt `publisherDisplayName: Placeholder_5909898657`, `identityName: youtube-desktop.TubeDesk` och version `0.5.6`; gamla `.appx`-paket ska inte laddas upp igen.
 
 `runFullTrust`-meddelandet är däremot en separat restricted capability-varning för Electron/AppX och ska motiveras i Partner Center, inte lösas genom att ta bort capabilityn.
 
@@ -113,7 +113,7 @@ För att undvika ett nytt 10.1.1.4-avslag bör screenshots visa TubeDesk som huv
 
 ## Nästa praktiska beslut
 
-Ändringarna finns på branchen `store-10-1-fix`. Efter varje metadataändring behöver ett nytt Store-paket byggas via GitHub Actions eller på Windows. Ladda inte upp ett äldre `.appx`-paket, eftersom manifestet i det paketet fortfarande innehåller gamla värden.
+Ändringarna finns nu på `main`. Efter varje metadataändring behöver ett nytt Store-paket byggas via GitHub Actions eller på Windows. Ladda inte upp ett äldre `.appx`-paket, eftersom manifestet i det paketet fortfarande innehåller gamla värden och/eller samma paketversion.
 
 ## Referenser
 
