@@ -60,7 +60,19 @@ You can also use GitHub Actions:
 GitHub → Actions → Build Windows Packages → Run workflow
 ```
 
-Download the artifact named `TubeDesk-Windows-Store-Package` and upload the generated `.appx` or `.msix` package in Partner Center.
+Download the artifact named `TubeDesk-Windows-Store-Package`, unzip it, and upload the generated `.appx` or `.msix` package in Partner Center.
+
+## Partner Center warning: `runFullTrust`
+
+Electron AppX packages normally declare the restricted capability `runFullTrust`. Microsoft documents that restricted capabilities require approval for Store submission, and Electron Builder documents that `runFullTrust` is required for most Electron apps and is added by default for AppX packages.
+
+Do **not** remove `runFullTrust` from the TubeDesk AppX package as a normal fix. Removing it can make the packaged Electron desktop app fail schema validation or fail to run correctly. Instead, handle the Partner Center package validation warning by completing the restricted-capability explanation in the submission flow.
+
+Use this explanation if Partner Center asks why `runFullTrust` is needed:
+
+> TubeDesk is a packaged Electron desktop application submitted as an AppX/MSIX package. The `runFullTrust` capability is required so the packaged desktop application can start and run its Electron main process as a standard full-trust Windows desktop app. TubeDesk uses this capability only for its local desktop shell features, including the application window, tray behavior, mini-player window, local session controls, and user-initiated navigation. TubeDesk does not use this capability to bypass Windows security, access user files without consent, install services, run background tasks outside the app session, or circumvent third-party websites or services.
+
+If Partner Center shows this as a **warning**, continue the submission after providing the explanation. If Partner Center shows it as a **blocking error** stating that the account is not authorized to submit `runFullTrust`, use Partner Center support or submit TubeDesk through the Store's Win32 desktop app flow instead of the AppX flow.
 
 ## Store listing checklist
 
