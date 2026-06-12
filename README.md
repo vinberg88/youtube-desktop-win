@@ -3,6 +3,7 @@
 DOWNLOAD FROM MICROSFT STORE =)
 
 <br>
+
  <a href="https://apps.microsoft.com/detail/9NBB6K4WP0ZM" target="_blank">
   <img 
     src="https://get.microsoft.com/images/en-us%20dark.svg" 
@@ -10,7 +11,8 @@ DOWNLOAD FROM MICROSFT STORE =)
     width="200"
   />
 </a>
-<br>
+
+<p>
 
 TubeDesk is a focused Windows desktop workspace for user-selected web video, audio, learning, and live-content workflows. It provides a dedicated desktop window with local custom shortcuts, mini-player mode, system tray support, keyboard shortcuts, focus mode, always-on-top mode, mute and zoom controls, and a custom power-user interface.
 
