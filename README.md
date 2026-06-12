@@ -230,6 +230,8 @@ MIT License. See [`LICENSE`](LICENSE).
 
 <img width="1280" height="800" alt="apps" src="https://github.com/user-attachments/assets/40d5c930-bd74-4ef3-85a4-fc34e8c15fd5" />
 
+<p>
+
 <img width="1357" height="878" alt="apps 41" src="https://github.com/user-attachments/assets/892d29a2-384e-4f06-9294-1ed617d11bbd" />
 
 <br>
