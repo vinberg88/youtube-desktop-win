@@ -1,5 +1,7 @@
 # TubeDesk for Windows 2026
 
+DOWNLOAD FROM MICROSFT STORE =)
+
 <img width="256" height="256" alt="Microsoft_Store_2020_dark" src="https://github.com/user-attachments/assets/ace5da43-5626-434b-b62a-ffffd91935f8" />
 
  [![Microsoft Store](https://img.shields.io/badge/Microsoft%20Store-Download-blue?logo=microsoft)](ms-windows-store://pdp/?productid=9NBB6K4WP0ZM)
