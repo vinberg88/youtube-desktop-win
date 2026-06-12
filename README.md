@@ -121,6 +121,14 @@ For the full release and Store publication workflow, see:
 - [`MICROSOFT_STORE_PUBLISHING.md`](MICROSOFT_STORE_PUBLISHING.md)
 - [`STORE-LISTING.md`](STORE-LISTING.md)
 
+
+<br>
+
+<img width="2160" height="2160" alt="apps 18" src="https://github.com/user-attachments/assets/6d64cb66-d2b2-415d-bda6-8188652414b2" />
+
+<br>
+
+
 ## Store Limitations
 
 When running as a Store app (`process.windowsStore === true`), global keyboard shortcuts are disabled because OS-level shortcuts are restricted in the AppX sandbox. Other app-level features such as tray behavior, notifications, webview usage, mini-player mode, focus mode, and local shortcuts remain available subject to Windows and website behavior.
