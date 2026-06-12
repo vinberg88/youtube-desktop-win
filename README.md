@@ -2,6 +2,14 @@
 
 DOWNLOAD FROM MICROSFT STORE =)
 
+<a href="https://apps.microsoft.com/detail/9NBB6K4WP0ZM" target="_blank">
+  <img 
+    src="https://get.microsoft.com/images/en-us%20dark.svg" 
+    alt="Get it from Microsoft Store" 
+    width="200"
+  />
+</a>
+
  <a href="https://apps.microsoft.com/detail/9NBB6K4WP0ZM" target="_blank">
   <img 
     src="https://get.microsoft.com/images/en-us%20dark.svg" 
